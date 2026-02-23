@@ -2,7 +2,7 @@ import { supabase } from "./lib/supabase";
 import { PostType } from "./type/postsType";
 
 
-export const getAllPosts = async () => {
+export const fetchPosts = async () => {
   const {data, error} = await supabase.from('posts').select('*');
 
   if(error) {
@@ -10,5 +10,5 @@ export const getAllPosts = async () => {
     return [];
   }
 
-  return data as PostType[];
+  return data as PostType[] || [];
 }
