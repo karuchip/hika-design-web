@@ -8,4 +8,7 @@ export type PostType = {
   created_at: Date;
   updated_at: Date;
   userId: UUID;
+  title: string;
+  topImage: string;
+  category: "UI/UX" | "フロントエンド";
 }
