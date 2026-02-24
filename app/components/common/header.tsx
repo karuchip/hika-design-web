@@ -11,7 +11,7 @@ const Header = () => {
           <Image src="/img/HikaDesign.png" alt="Hika Design logo" width={53} height={42} />
         </Link>
         <div className="flex text-[18px]">
-          <p className="mr-10"><Link href="/showBlog">Blog</Link></p>
+          <p className="mr-10"><Link href="/showblog">Blog</Link></p>
           <p><Link href="/">Portfolio</Link></p>
         </div>
       </div>
