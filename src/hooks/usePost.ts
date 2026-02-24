@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { PostType } from "../type/postsType"
 import { fetchPosts } from "../fetchPosts";
 
-export const usePost = () => {
+export const UsePost = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [loading, setLoading] = useState(true);
 

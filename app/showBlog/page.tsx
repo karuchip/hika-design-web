@@ -1,14 +1,15 @@
 "use client"
 
 // import { BlockType } from "@/src/type/postTypeBlocks"
-import { usePost } from "@/src/hooks/usePost"
+import { UsePost } from "@/src/hooks/usePost"
 import Loading from "../components/common/loading";
 import Image from "next/image"
 import Link from "next/link";
+import {CategoryColors} from "@/src/stylecss/categoryColors"
 
 const showblog = () => {
 
-  const result = usePost();
+  const result = UsePost();
   console.log(result);
   const {posts, loading} = result;
 
@@ -32,7 +33,9 @@ const showblog = () => {
                 <div className="w-[300px]">
                   <p className="w-[300px] text-[#586869] text-right my-[5px]">{new Date(post.created_at).toLocaleDateString()}</p>
                   <div className="relative">
-                    <p className="w-fit px-[40px] py-[3px] absolute z-[1] text-[#ffffff] bg-[#B47F90] rounded-lg text-[18px]">{post.category}</p>
+                    <p className={`w-fit px-[40px] py-[3px] absolute z-[1] text-[#ffffff] rounded-lg text-[18px] ${CategoryColors[post.category] || CategoryColors.default}`}>
+                      {post.category}
+                    </p>
 
                     <div className="relative w-[300px] z-[0] h-[180px] aspect-video overflow-hidden rounded-lg">
                       <Image
