@@ -38,7 +38,7 @@ const showblog = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
           {posts.map(post => (
 
-            <Link key={post.id} href={`/showblog/${post.id}`}>
+            <Link key={post.id} href={`/showblogs/${post.id}`}>
 
               <div className="w-[300px]">
                 <p className="w-[300px] text-[#586869] text-right my-[5px]">{new Date(post.created_at).toLocaleDateString()}</p>
