@@ -1,9 +1,13 @@
 'use client'
 
 import Image from "next/image"
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "UI/UX未経験からフロントエンド・UIデザインで仕事を得るまで",
+};
 
 const Home = () => {
-
   return(
     <>
       <div className="pt-30">
@@ -23,10 +27,10 @@ const Home = () => {
                 className="w-full h-full object-cover md:object-center"
               />
             </div>
-            <div className="md:absolute md:z-[1] md:reft-0 md:bottom-[-400] flex items-center h-[280px] md:max-w-[680px] md:h-[300px] bg-[#FDFAEF] text-[#586869] items-center justify-center">
+            <div className="md:absolute md:z-[1] md:left-0 md:bottom-[-400] flex items-center h-[280px] md:max-w-[680px] md:h-[300px] bg-[#FDFAEF] text-[#586869] items-center justify-center">
               <div>
-                <h1 className="w-fit mx-auto text-[24px] font-bold md:text-[36px] mb-5 px-5">UI/UX未経験から仕事を得るまで</h1>
-                <p className="px-10 md:px-30 md:mx-auto md:text-[20px]">2024年9月から趣味でwebアプリ開発を続けてきた私が、UI/UXデザインとフロントエンドの理解を深め、学びを実務に繋げていくまでの過程を記録しています</p>
+                <h1 className="w-fit mx-auto text-[24px] font-bold md:text-[36px] mb-5 px-5">UI/UX未経験からフロントエンド・UIデザインで仕事を得るまで</h1>
+                <p className="px-10 md:px-30 md:mx-auto md:text-[20px]">2024年9月から趣味でWebアプリ開発を続けてきた私が、UIデザインとフロントエンドの理解を深め、学びを実務に繋げていくまでの過程を記録しています</p>
               </div>
             </div>
           </div>

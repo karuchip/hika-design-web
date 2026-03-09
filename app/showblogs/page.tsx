@@ -7,6 +7,13 @@ import Image from "next/image"
 import Link from "next/link";
 import {CategoryColors} from "@/src/stylecss/categoryColors"
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "UI/UX・フロントエンド開発・学習記録などをまとめています。",
+};
+
 const showblog = () => {
 
   // カスタムフックの呼び出し
