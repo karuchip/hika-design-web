@@ -34,7 +34,7 @@ const Header = () => {
     }`}>
       <div className="flex justify-between p-10">
         <Link href="/">
-          <Image src="/img/HikaDesign.png" alt="Hika Design logo" width={53} height={42} className="h-auto"/>
+          <Image src="/img/HikaDev+Design.png" alt="Hika Design logo" width={53} height={42} className="h-auto"/>
         </Link>
         <div className="flex text-[18px]">
           <p className="mr-10"><Link href="/blog">Blog</Link></p>

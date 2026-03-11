@@ -44,7 +44,7 @@ const BlogDetailPage = ({ params }: { params: { id: string } }) => {
       <div className="lg:flex lg:gap-[40px] lg:justify-center">
 
         {/* 左サイド */}
-        <div className="w-max-[360px] lg:max-w-[864px] md:min-w-[664px] mx-[20px] lg:mx-0 mb-[20px] lg:mb-[60px] h-auto bg-[#ffffff] rounded-3xl shadow-lg">
+        <div className="w-max-[360px] lg:max-w-[864px] md:min-w-[664px] mx-[20px] lg:mx-0 mb-[20px] lg:mb-[200px] h-auto bg-[#ffffff] rounded-3xl shadow-lg">
           {/* ラベル画像 */}
           <div className="w-full h-[60px] md:h-[120px] overflow-hidden rounded-t-3xl mb-[16px] md:mb-[32px]">
             <Image
@@ -70,7 +70,7 @@ const BlogDetailPage = ({ params }: { params: { id: string } }) => {
             </div>
 
             {/* タイトル */}
-            <h1 className="text-[32px] md:text-[40px] font-bold mb-[15px]">{onePost.title}</h1>
+            <h1 className="w-full text-[32px] md:text-[40px] font-bold mb-[15px] break-words">{onePost.title}</h1>
 
             {/* 区切り棒 */}
             <div className="w-full h-[7px] bg-[#FCFCFC]">

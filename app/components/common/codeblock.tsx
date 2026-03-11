@@ -39,7 +39,7 @@ const CodeBlock = ({code}:Props)=> {
       </button>
 
       <pre>
-        <code>{code}</code>
+        <code className="text-[14px] ml:text-[16px]">{code}</code>
       </pre>
 
     </div>

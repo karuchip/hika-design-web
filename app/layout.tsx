@@ -18,12 +18,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://hika-design.com"),
   title: {
-    default: "Hika Design",
-    template: "%s | Hika Design",
+    default: "Hika Dev + Design",
+    template: "%s | Hika Dev + Design",
   },
   description:
     "Hikaのポートフォリオサイト。UIデザインやフロントエンド開発、制作事例やブログを掲載しています。",
-  keywords: ["ポートフォリオ", "UIデザイン", "フロントエンド", "Next.js"],
+  keywords: ["ポートフォリオ", "UIデザイン", "フロントエンド", "React", "Next.js"],
   authors: [{ name: "Hika | ひか" }],
   creator: "Hika | ひか",
 };
