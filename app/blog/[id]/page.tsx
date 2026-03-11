@@ -33,7 +33,7 @@ const BlogDetailPage = ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <div className="pt-30 bg-[#FCFCFC]">
 
-      {/* パンくずリスト */}
+      {/* パンくずリスト + 読了率バー */}
       <Breadcrumb
       items={[
         {label: "Home", href: "/"},
