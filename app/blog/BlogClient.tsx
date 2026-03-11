@@ -32,7 +32,7 @@ const BlogClient = () => {
 
   return(
     <>
-      <div className="pt-36 bg-[#FCFCFC] pb-30 px-[20px]">
+      <div className="pt-30 bg-[#FCFCFC] pb-30">
 
         {/* パンくずリスト */}
         <Breadcrumb
