@@ -1,6 +1,7 @@
 // パンくずリスト
 import Link from "next/link";
 import HomeIcon from '@mui/icons-material/Home';
+import ReadingProgress from "../blog/readingProgress";
 
 type props = {
   label: string;
@@ -10,7 +11,7 @@ type props = {
 const Breadcrumb = ({items}:{items:props[]}) => {
 
   return(
-    <div className="flex gap-[5px] text-[13px] md:text-[14px] pl-[20px] py-[15px] lg:pl-[40px] text-[#A6A6A6] mb-10 sticky top-0 bg-[#FCFCFC] shadow-md">
+    <div className="relative flex gap-[5px] text-[13px] md:text-[14px] pl-[20px] py-[15px] lg:pl-[40px] text-[#A6A6A6] mb-10 sticky top-0 bg-[#FCFCFC] shadow-md">
       {items.map((item, index) => (
         <span key={index}>
           {item.href ? (
@@ -34,6 +35,10 @@ const Breadcrumb = ({items}:{items:props[]}) => {
           {index < items.length - 1 && <span>{" >"}</span>}
         </span>
       ))}
+
+      {/* 読了率バー */}
+      <ReadingProgress/>
+
     </div>
   )
 }
