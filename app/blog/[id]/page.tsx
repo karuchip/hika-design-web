@@ -4,7 +4,6 @@ import Loading from "@/app/components/common/loading";
 import {usePostOne} from "@/src/hooks/usePostOne"
 import {use} from "react"
 import Image from "next/image"
-import React from "react";
 import {CategoryColors} from "@/src/stylecss/categoryColors"
 import Chapter from "@/app/components/blog/chapter";
 import Breadcrumb from "@/app/components/common/breadcrumb";
@@ -32,7 +31,7 @@ const BlogDetailPage = ({ params }: { params: Promise<{ id: string }> }) => {
   }
 
   return (
-    <div className="pt-36 bg-[#FCFCFC]">
+    <div className="pt-30 bg-[#FCFCFC]">
 
       {/* パンくずリスト */}
       <Breadcrumb
@@ -184,7 +183,7 @@ const BlogDetailPage = ({ params }: { params: Promise<{ id: string }> }) => {
 
 
           {/* 目次 */}
-          <div className="hidden lg:inline-block my-[20px] justify-center sticky top-[140px]">
+          <div className="hidden lg:inline-block my-[20px] justify-center sticky top-[70px]">
               <Chapter onePost={onePost}/>
           </div>
         </div>
