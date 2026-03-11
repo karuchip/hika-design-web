@@ -7,6 +7,7 @@ import Image from "next/image"
 import {CategoryColors} from "@/src/stylecss/categoryColors"
 import Chapter from "@/app/components/blog/chapter";
 import Breadcrumb from "@/app/components/common/breadcrumb";
+import CodeBlock from "@/app/components/common/codeblock";
 
 const BlogDetailPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const resolvedParams = use(params);
@@ -147,12 +148,7 @@ const BlogDetailPage = ({ params }: { params: Promise<{ id: string }> }) => {
                   } else if (one.type === "code") {
                     return (
                       <div key={one.id}>
-                        <div
-                          className="p-[30px] bg-[#F3F3F3] my-[20px] md:my-[30px] rounded-xl"
-                          style={{ whiteSpace: "pre-wrap"}}
-                        >
-                          <code>{one.code}</code>
-                        </div>
+                        <CodeBlock code={one.code}/>
                       </div>
                     )
                   }
