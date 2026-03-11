@@ -5,6 +5,7 @@ import Link from "next/link";
 import {CategoryColors} from "@/src/stylecss/categoryColors"
 import Loading from "../components/common/loading";
 import { UsePost } from "@/src/hooks/usePost";
+import Breadcrumb from "../components/common/breadcrumb";
 
 
 
@@ -31,7 +32,15 @@ const BlogClient = () => {
 
   return(
     <>
-      <div className="py-30 px-[20px]">
+      <div className="pt-36 bg-[#FCFCFC] pb-30 px-[20px]">
+
+        {/* パンくずリスト */}
+        <Breadcrumb
+        items={[
+          {label: "Home", href: "/"},
+          {label: "Blog"},
+        ]}
+        />
 
         <h1 className="w-fit mx-auto mb-5 text-[36px] md:text-[48px]">Blog</h1>
 
