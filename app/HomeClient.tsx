@@ -1,6 +1,7 @@
 'use client'
 
 import Image from "next/image"
+import Link from "next/link"
 
 const HomeClient = () => {
   return(
@@ -10,7 +11,7 @@ const HomeClient = () => {
         {/* FV */}
         <div className="md:mx-[75px] md:h-[500px] md:mb-20">
           <div className="flex justify-center mb-6 md:mb-10">
-            <Image src="/img/HikaDesign.png" alt="Hika Design logo" width={79} height={62} />
+            <Image src="/img/HikaDev+Design.png" alt="Hika Design logo" width={79} height={62} />
           </div>
           <div className="md:relative">
             <div className="w-full md:max-w-[1051px] h-[350px] md:h-[511px] overflow-hidden md:absolute md:z-[-1] md:right-0">
@@ -28,6 +29,20 @@ const HomeClient = () => {
                 <p className="px-10 md:px-30 md:mx-auto md:text-[20px]">2024年9月から趣味でWebアプリ開発を続けてきた私が、UIデザインとフロントエンドの理解を深め、学びを実務に繋げていくまでの過程を記録しています</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Blog */}
+        <div className="md:mx-[75px] md:flex my-20 md:mt-40">
+          <div className="w-full">
+            <h2 className="w-fit mx-auto mb-3 text-[36px] md:text-[48px]">Blog</h2>
+            <div className="w-fit mx-auto mb-10">
+              <Link href="/blog" className="">全ての記事を見る</Link>
+              <div className="w-full h-[1px] bg-[#586869]"><span></span></div>
+            </div>
+            <div>aaaa</div>
+
+
           </div>
         </div>
 
