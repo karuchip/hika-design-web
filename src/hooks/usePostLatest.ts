@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { PostListType } from "../type/postListType"
-import { fetchPosts } from "../fetchPosts";
+import { fetchPostLatest } from "../fetchPostsLatest";
 
-export const UsePost = () => {
-  const [posts, setPosts] = useState<PostListType[] | null>(null);
+export const UsePostLatest = () => {
+  const [postLatest, setPostLatest] = useState<PostListType[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -11,41 +11,41 @@ export const UsePost = () => {
 
     let cancelled = false;
 
-    const load = async () => {
+    const load = async() => {
       try{
         setLoading(true);
         setError(null);
 
-        const {data, error: fetchError, status} = await fetchPosts();
+        const {data, error: fetchError, status} = await fetchPostLatest();
 
         if(cancelled) return;
 
         if(fetchError) {
           if(status === 404) {
-            setError("Posts not found");
-            setPosts(null);
+            setError("Posts not found") ;
+            setPostLatest(null);
           } else {
             setError(fetchError.message);
-            setPosts(null);
+            setPostLatest(null);
           }
-        } else {
-          setPosts(data);
+        }else {
+          setPostLatest(data);
         }
-      } catch (e) {
+      } catch(e) {
         if(!cancelled) {
           setError(e instanceof Error ? e.message :String(e));
-          setPosts(null);
+          setPostLatest(null);
         }
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) setLoading(false)
       }
     };
 
     load();
     return () => {
       cancelled = true;
-    };
+    }
   }, []);
 
-  return {posts, loading, error};
+  return {postLatest, loading, error};
 }

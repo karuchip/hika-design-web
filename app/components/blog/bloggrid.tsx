@@ -1,9 +1,9 @@
-import { PostType } from "@/src/type/postsType"
+import { PostListType } from "@/src/type/postListType"
 import Link from "next/link"
 import Image from "next/image"
 import { CategoryColors } from "@/src/stylecss/categoryColors"
 
-const Bloggrid = ({posts}: {posts: PostType[]}) => {
+const Bloggrid = ({posts}: {posts: PostListType[]}) => {
 
   const sortedItem = [...posts].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 

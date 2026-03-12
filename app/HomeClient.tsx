@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import BlogLatest from "./components/home/blogLatest"
 
 const HomeClient = () => {
   return(
@@ -33,14 +34,15 @@ const HomeClient = () => {
         </div>
 
         {/* Blog */}
-        <div className="md:mx-[75px] md:flex my-20 md:mt-40">
+        <div className="md:mx-[75px] md:flex my-20 md:mt-40 bg-[#F5F5F5] py-[40px]">
           <div className="w-full">
             <h2 className="w-fit mx-auto mb-3 text-[36px] md:text-[48px]">Blog</h2>
+
+            <BlogLatest/>
             <div className="w-fit mx-auto mb-10">
               <Link href="/blog" className="">全ての記事を見る</Link>
               <div className="w-full h-[1px] bg-[#586869]"><span></span></div>
             </div>
-            <div>aaaa</div>
 
 
           </div>
@@ -48,7 +50,7 @@ const HomeClient = () => {
 
 
         {/* Profile */}
-        <div className="md:mx-[75px] md:flex md:mb-20">
+        <div className="md:mx-[75px] md:flex md:mb-20 justify-center">
           <div className="w-full md:w-[635px] h-[475px]">
             <Image
               src="/img/profileIcon.png"
