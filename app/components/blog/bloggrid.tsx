@@ -14,7 +14,7 @@ const Bloggrid = ({posts}: {posts: PostListType[]}) => {
         {sortedItem
           .map(item => (
 
-            <Link key={item.id} href={`/blog/${item.id}`}>
+            <Link key={item.id} href={`/blog/show/${item.id}`}>
 
               <div className="w-[300px]">
                 <p className="w-[300px] text-[#586869] text-right my-[5px]">{new Date(item.created_at).toLocaleDateString()}</p>
