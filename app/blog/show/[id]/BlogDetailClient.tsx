@@ -36,7 +36,7 @@ const BlogDetailPage = ({ params }: { params: { id: string } }) => {
       <Breadcrumb
       items={[
         {label: "Home", href: "/"},
-        {label: "Blog", href: "/blog"},
+        {label: "Blog", href: "/blog/show"},
         {label: onePost.title}
       ]}
       />
