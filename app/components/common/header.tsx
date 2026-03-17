@@ -37,7 +37,7 @@ const Header = () => {
           <Image src="/img/HikaDev+Design.png" alt="Hika Design logo" width={53} height={42} className="h-auto"/>
         </Link>
         <div className="flex text-[18px]">
-          <p className="mr-10"><Link href="/blog">Blog</Link></p>
+          <p className="mr-10"><Link href="/blog/show">Blog</Link></p>
           <p><Link href="/">Portfolio</Link></p>
         </div>
       </div>

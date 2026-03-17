@@ -1,9 +1,10 @@
 "use client"
 
-import Loading from "../components/common/loading";
+import Loading from "@/app/components/common/loading";
+import Breadcrumb from  "@/app/components/common/breadcrumb"
+import Bloggrid from "@/app/components/blog/bloggrid"
 import { UsePost } from "@/src/hooks/usePost";
-import Breadcrumb from "../components/common/breadcrumb";
-import Bloggrid from "../components/blog/bloggrid";
+
 
 
 
