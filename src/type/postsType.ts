@@ -2,7 +2,7 @@ import { UUID } from "crypto";
 import { BlockType } from "./postTypeBlocks";
 
 export type PostType = {
-  id: number;
+  id: string;
   blocks: BlockType[];
   published: boolean;
   created_at: Date;

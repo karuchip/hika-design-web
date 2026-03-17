@@ -3,24 +3,61 @@
 import { BlockType } from "@/src/type/postTypeBlocks";
 import { useState } from "react";
 import BlockEditor from "@/app/components/blog/blockEditor"
+import { useSetAtom } from "jotai";
+import { blogInputAtom } from "@/src/jotai/bloginputAtom";
+import { useRouter } from "next/navigation";
+
+type CategoryType = "UI/UX" | "フロントエンド";
 
 const BlogCreateClient = () => {
 
+  // router
+  const router = useRouter();
+
+  // useState
   const [title, setTitle] = useState("");
   const [topImage, setTopImage] = useState("");
-  const [blocks, setBlocks] = useState<Partial<BlockType>[]>([]);
+  const [category, setCategory] = useState<CategoryType>("UI/UX");
+  const [blocks, setBlocks] = useState<BlockType[]>([]);
 
+  // jotai
+  const setInputAtom = useSetAtom(blogInputAtom);
 
   // (追加) block要素追加
   const addBlock = (type: BlockType["type"]) => {
-    const newBlock: Partial<BlockType> = {
-      id: crypto.randomUUID(),
-      type,
-      order: blocks.length,
-      ...(type === "heading" && {level: 1, content: ""}),
-      ...(type === "text" && {content: ""}),
-      ...(type === "image" && {src: "", alt: ""}),
-      ...(type === "code" && {code: "", showLineNumbers: false}),
+    let newBlock: BlockType
+
+    if (type === "heading") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "heading",
+        level: 1,
+        content: "",
+        order: blocks.length,
+      }
+    } else if (type === "text") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "text",
+        content: "",
+        order: blocks.length,
+      }
+    } else if (type === "image") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "image",
+        src: "",
+        alt: "",
+        order: blocks.length,
+      }
+    } else {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "code",
+        code: "",
+        showLineNumbers: false,
+        order: blocks.length,
+      }
     }
     setBlocks([...blocks, newBlock])
   }
@@ -37,7 +74,10 @@ const BlogCreateClient = () => {
     setBlocks(newBlocks);
   }
 
-  // (更新) タイトル・トップ画像更新処理
+  // (更新) カテゴリー・タイトル・トップ画像更新処理
+  const updateCategory = (category: CategoryType) => {
+    setCategory(category);
+  }
   const updateTitle = (title:string) => {
     setTitle(title);
   }
@@ -48,13 +88,28 @@ const BlogCreateClient = () => {
   // (更新) block更新処理
   const updateBlock = (index: number, newData:Partial<BlockType>) => {
     const newBlocks = [...blocks];
-    newBlocks[index] = {...newBlocks[index], ...newData};
+    newBlocks[index] = {
+      ...newBlocks[index],
+      ...newData
+    } as BlockType;
     setBlocks(newBlocks);
   }
 
   // 最終button処理
   const gotoPreview = () => {
-    console.log(blocks);
+
+    const id = crypto.randomUUID();
+    // jotaiに追加
+    setInputAtom({
+      id,
+      title,
+      topImage,
+      blocks,
+      published: false,
+      category
+    });
+
+    router.push(`/blog/preview`)
   }
 
 
@@ -63,6 +118,16 @@ const BlogCreateClient = () => {
       <div className="pt-30 bg-[#FCFCFC]">
         {/* タイトル・トップイメージ追加 */}
         <div>
+          <label>
+            <h3>カテゴリー</h3>
+            <select
+            value={category}
+            onChange={(e)=>updateCategory(e.target.value as CategoryType)}
+          >
+            <option value={"UI/UX"}>UI/UX</option>
+            <option value={"フロントエンド"}>フロントエンド</option>
+          </select>
+          </label>
           <label>
             <h3>タイトル</h3>
             <input

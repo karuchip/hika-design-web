@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/common/header";
 import Footer from "./components/common/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import {Providers} from "@/app/components/provider/jotaiProvider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,9 +40,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
-        {children}
-        <Footer/>
+        <Providers>
+          <Header/>
+          {children}
+          <Footer/>
+        </Providers>
 
         {/* Google Analytics */}
         <GoogleAnalytics gaId="G-R8XN21WSG5" />
