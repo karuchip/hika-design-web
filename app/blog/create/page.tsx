@@ -1,5 +1,8 @@
 import BlogCreateClient from "./BlogCreateClient";
 
-export default function Page() {
+const BlogCreate = async() => {
+
   return <BlogCreateClient/>;
 }
+
+export default BlogCreate
