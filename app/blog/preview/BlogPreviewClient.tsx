@@ -6,19 +6,43 @@ import { supabase } from "@/src/lib/supabase";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { User } from "@supabase/supabase-js"
+import Loading from "@/app/components/common/loading";
 
 const BlogPreviewClient = () => {
 
   const router = useRouter();
 
+  // jotai
   const [inputAtom, setInputAtom] = useAtom(blogInputAtom);
 
+  // ログイン情報取得
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!user) {
+        console.log("ユーザーがいません")
+        router.push("/user/login")
+        return
+      }
+      setUser(user)
+      setLoading(false)
+    }
+    getUser()
+  }, [router])
+
+
+  // プレビュー表示用コンポーネントに渡すデータを作成
   if (!inputAtom?.id) {
-    console.log("ここです！！");
     return null;
   }
-
-  // プレビュー表示用コンポーネントに渡すデータ作成
   const data = {
     id: inputAtom.id,
     category: inputAtom.category,
@@ -35,12 +59,18 @@ const BlogPreviewClient = () => {
   const onSubmit = async(type: "post" | "save") => {
     if (!inputAtom) return
 
+    if (!user) {
+      alert("ログインしてください")
+      return
+    }
+
     const insertData = {
       category: inputAtom.category,
       title: inputAtom.title || "",
       topImage: inputAtom.topImage,
       blocks: inputAtom.blocks || [],
       published: type === "post",
+      user_id: user.id
     }
 
     const { error } = await supabase
@@ -53,12 +83,14 @@ const BlogPreviewClient = () => {
     }
 
     if (!error) {
-      console.log(type === "post" ? "投稿完了" : "下書き保存完了!")
+      alert(type === "post" ? "投稿完了" : "下書き保存完了!")
       setInputAtom(null) // 投稿 or 保存後にリセット
-      router.push("/blogs") // 一覧へ
+      router.push("/blog/show") // 一覧へ
     }
 
   }
+
+  if(loading) return<Loading/>
 
   return(
     <>

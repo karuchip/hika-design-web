@@ -6,6 +6,8 @@ import BlockEditor from "@/app/components/blog/blockEditor"
 import { useAtom } from "jotai";
 import { blogInputAtom } from "@/src/jotai/bloginputAtom";
 import { useRouter } from "next/navigation";
+import { User } from "@supabase/supabase-js"
+import { supabase } from "@/src/lib/supabase";
 
 type CategoryType = "UI/UX" | "フロントエンド";
 
@@ -13,6 +15,28 @@ const BlogCreateClient = () => {
 
   // router
   const router = useRouter();
+
+  // ログイン情報
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!user) {
+        console.log("ユーザーがいません")
+        router.push("/user/login")
+        return
+      }
+      setUser(user)
+      setLoading(false)
+    }
+    getUser()
+  }, [router])
+
 
   // useState
   const [title, setTitle] = useState("");
@@ -124,6 +148,8 @@ const BlogCreateClient = () => {
 
     router.push(`/blog/preview`)
   }
+
+  if (loading) return <p>Loading...</p>
 
 
   return(
