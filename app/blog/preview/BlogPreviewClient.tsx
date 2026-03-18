@@ -2,17 +2,23 @@
 
 import BlogDetailFormat from "@/app/components/blog/blogDetailFormat";
 import { blogInputAtom } from "@/src/jotai/bloginputAtom";
-import { useAtomValue } from "jotai";
+import { supabase } from "@/src/lib/supabase";
+import { useAtom } from "jotai";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const BlogPreviewClient = () => {
 
-  const inputAtom = useAtomValue(blogInputAtom);
+  const router = useRouter();
+
+  const [inputAtom, setInputAtom] = useAtom(blogInputAtom);
 
   if (!inputAtom?.id) {
+    console.log("ここです！！");
     return null;
   }
 
-  // プレビュー画面に渡すデータ作成
+  // プレビュー表示用コンポーネントに渡すデータ作成
   const data = {
     id: inputAtom.id,
     category: inputAtom.category,
@@ -25,8 +31,33 @@ const BlogPreviewClient = () => {
     userId: crypto.randomUUID() as `${string}-${string}-${string}-${string}-${string}`,
   }
 
-  const onSubmit = () => {
-    console.log("投稿する");
+  // 投稿ボタン押下時の処理
+  const onSubmit = async(type: "post" | "save") => {
+    if (!inputAtom) return
+
+    const insertData = {
+      category: inputAtom.category,
+      title: inputAtom.title || "",
+      topImage: inputAtom.topImage,
+      blocks: inputAtom.blocks || [],
+      published: type === "post",
+    }
+
+    const { error } = await supabase
+      .from("posts")
+      .insert([insertData])
+
+    if ( error ) {
+      console.error("insert error:", error);
+      return;
+    }
+
+    if (!error) {
+      console.log(type === "post" ? "投稿完了" : "下書き保存完了!")
+      setInputAtom(null) // 投稿 or 保存後にリセット
+      router.push("/blogs") // 一覧へ
+    }
+
   }
 
   return(
@@ -36,7 +67,9 @@ const BlogPreviewClient = () => {
         <BlogDetailFormat
           onePost={data}/>
 
-        <button type="submit" onClick={()=>onSubmit()}>投稿する</button>
+        <button type="submit" onClick={()=>onSubmit("post")}>投稿する</button>
+        <button type="button" onClick={()=>onSubmit("save")}>保存する</button>
+        <Link href="/blog/create">戻る</Link>
       </div>
     </>
   )

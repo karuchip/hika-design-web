@@ -1,9 +1,9 @@
 "use client"
 
 import { BlockType } from "@/src/type/postTypeBlocks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BlockEditor from "@/app/components/blog/blockEditor"
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { blogInputAtom } from "@/src/jotai/bloginputAtom";
 import { useRouter } from "next/navigation";
 
@@ -21,7 +21,20 @@ const BlogCreateClient = () => {
   const [blocks, setBlocks] = useState<BlockType[]>([]);
 
   // jotai
-  const setInputAtom = useSetAtom(blogInputAtom);
+  const [inputAtom, setInputAtom] = useAtom(blogInputAtom);
+
+  // jotaiとuseEffectの同期処理
+  useEffect(() => {
+    const stateSetter = () => {
+      if(!inputAtom?.id) return
+      setTitle(prev => prev || inputAtom.title)
+      setTopImage(prev => prev || inputAtom.topImage)
+      setCategory(prev => prev || inputAtom.category)
+      setBlocks(prev => prev || inputAtom.blocks)
+    }
+    stateSetter()
+
+  },[inputAtom])
 
   // (追加) block要素追加
   const addBlock = (type: BlockType["type"]) => {
