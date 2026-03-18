@@ -40,7 +40,7 @@ const HomeClient = () => {
 
             <BlogLatest/>
             <div className="w-fit mx-auto mb-10">
-              <Link href="/blog" className="">全ての記事を見る</Link>
+              <Link href="/blog/show" className="">全ての記事を見る</Link>
               <div className="w-full h-[1px] bg-[#586869]"><span></span></div>
             </div>
 
@@ -65,8 +65,7 @@ const HomeClient = () => {
               <h2 className="w-fit mx-auto mb-5 text-[36px] md:text-[48px]">Profile</h2>
               <div className="w-[364px] md:px-[20px] md:text-[20px]">
                 <p className="mb-3">UI/UXデザインとフロントエンドを学びながら、React / Next.js / TypeScript / Supabase を使ってWebアプリを個人開発しています。</p>
-                <p className="mb-3">就職・転職を見据え、学習と制作のプロセスを記録中。一つひとつを丁寧に積み上げていくタイプです。</p>
-                <p>茨城県在住 / 26歳</p>
+                <p>茨城 / 26歳</p>
               </div>
             </div>
           </div>
