@@ -99,9 +99,32 @@ const BlogPreviewClient = () => {
         <BlogDetailFormat
           onePost={data}/>
 
-        <button type="submit" onClick={()=>onSubmit("post")}>投稿する</button>
-        <button type="button" onClick={()=>onSubmit("save")}>保存する</button>
-        <Link href="/blog/create">戻る</Link>
+        <div className="flex justify-center gap-10">
+
+          <Link
+            href="/blog/create"
+            className="w-fit my-10 py-2 px-8 bg-[#586869] text-[#ffffff] font-bold text-[20px]"
+          >
+            戻る
+          </Link>
+
+          <button
+            type="submit"
+            onClick={()=>onSubmit("post")}
+            className="w-fit my-10 py-2 px-8 bg-[#586869] text-[#ffffff] font-bold text-[20px]"
+          >
+            投稿する
+          </button>
+
+          <button
+            type="button"
+            onClick={()=>onSubmit("save")}
+            className="w-fit my-10 py-2 px-8 bg-[#586869] text-[#ffffff] font-bold text-[20px]"
+          >
+            保存する
+          </button>
+
+        </div>
       </div>
     </>
   )

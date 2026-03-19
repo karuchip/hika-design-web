@@ -54,10 +54,11 @@ const BlogCreateClient = () => {
   useEffect(() => {
     const stateSetter = () => {
       if(!inputAtom?.id) return
-      setTitle(prev => prev || inputAtom.title)
-      setTopImage(prev => prev || inputAtom.topImage)
-      setCategory(prev => prev || inputAtom.category)
-      setBlocks(prev => prev || inputAtom.blocks)
+      setTitle(inputAtom.title)
+      setTopImage(inputAtom.topImage)
+      setCategory(inputAtom.category)
+      setBlocks(inputAtom.blocks)
+
     }
     stateSetter()
 
