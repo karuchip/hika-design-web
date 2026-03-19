@@ -81,7 +81,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                     }else if (one.level === 2) {
                       return (
                         <div key={one.id}>
-                          <h3  id={one.id} className="font-bold text-[18px] md:text-[22px] mb-[10px] md:mb-[20px]">{one.content}</h3>
+                          <h3  id={one.id} className="font-bold text-[18px] md:text-[22px] mt-[10px] md:mt-[30px] mb-[5px] md:mb-[10px]">{one.content}</h3>
                         </div>
                       )
                     }else if (one.level === 3) {
@@ -96,7 +96,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                   } else if (one.type === "text") {
                     return (
                       <div key={one.id}>
-                        <p className="text-[16px] md:text-[18px] my-[10px]">{one.content}</p>
+                        <p className="text-[16px] md:text-[20px] my-[10px]">{one.content}</p>
                       </div>
                     )
 
