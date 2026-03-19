@@ -49,7 +49,7 @@ const Chapter = ({onePost}:Props) => {
               return(
                 <div key={item.id} className="w-full mt-6 mb-1">
                   <a href={`#${item.id}`}>
-                    <p className={`text-[16px] md:text-[20px] hover:text-[#000000] mt-3
+                    <p className={`text-[16px] md:text-[18px] hover:text-[#000000] mt-3 px-2
                         ${activeHeading === item.id
                           ? "text-black font-bold bg-[#F0ECEC]"
                           : "text-[#586869]"
@@ -65,13 +65,13 @@ const Chapter = ({onePost}:Props) => {
               return (
                 <div key={item.id} className="w-full my-2">
                   <a  href={`#${item.id}`}>
-                    <p className={`text-[14px] md:text-[18px] font-normal hover:text-[#000000] hover:font-bold
+                    <p className={`text-[14px] md:text-[16px] font-normal hover:text-[#000000] hover:font-bold  px-2
                       ${activeHeading === item.id
                           ? "text-black font-bold bg-[#F0ECEC]"
                           : "text-[#586869]"
                       }
                     `}>
-                      <div className="flex gap-3"><span>・</span><p>{item.content}</p></div>
+                      <div className="flex gap-3"><span>・</span><span>{item.content}</span></div>
                     </p>
                   </a>
                 </div>
