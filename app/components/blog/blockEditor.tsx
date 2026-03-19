@@ -1,4 +1,5 @@
 import { BlockType } from "@/src/type/postTypeBlocks"
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 type Props = {
   block: BlockType;
@@ -10,89 +11,117 @@ type Props = {
 const BlockEditor = ({block, index, updateBlock, deleteBlock}: Props) => {
 
   if(block.type === "heading") {
-    return(
-      <div>
-        <h3>見出し入力</h3>
-        <label>
-          <p>見出し</p>
-          <input
-            value={block.content}
-            onChange={(e) => updateBlock(index, {content: e.target.value})}
-          />
-        </label>
-        <label>
-          <p>スタイル</p>
-          <select
-            value={block.level}
-            onChange={(e) => updateBlock(index, {level: Number(e.target.value) as 1 | 2 | 3})}
-          >
-            <option value={1}>H1</option>
-            <option value={2}>H2</option>
-            <option value={3}>H3</option>
-          </select>
-        </label>
 
-        {/* 削除 */}
-        <button onClick={()=>deleteBlock(index)}>削除</button>
 
-      </div>
-    )
+    if (block.level === 1) {
+      return(
+
+        <div className="mt-[30px] md:mt-[50px] mb-[20px] flex gap-3 content-center">
+          <label className="flex-1">
+            <input
+              value={block.content}
+              onChange={(e) => updateBlock(index, {content: e.target.value})}
+              placeholder="見出し1"
+              className="bg-[#F7F7F7] p-3 font-bold text-[22px] md:text-[30px] w-full"
+            />
+            <div className="w-full h-[1px] bg-[#AFAFAF]">
+              <span></span>
+            </div>
+          </label>
+          {/* 削除 */}
+          <button onClick={()=>deleteBlock(index)} className="flex-none"><DeleteOutlineIcon sx={{fontSize:"large"}}/></button>
+        </div>
+      )
+    } else if (block.level === 2) {
+      return(
+        <div className="mt-[20px] mb-[10px] mt-[20px] md:mt-[40px] md:mb-[20px] flex gap-3 content-center">
+          <label className="flex-1">
+            <input
+              value={block.content}
+              onChange={(e) => updateBlock(index, {content: e.target.value})}
+              placeholder="見出し2"
+              className="bg-[#F7F7F7] p-3 w-full font-bold text-[18px] md:text-[22px]"
+            />
+          </label>
+          {/* 削除 */}
+          <button className="flex-none" onClick={()=>deleteBlock(index)}><DeleteOutlineIcon sx={{fontSize:"large"}}/></button>
+        </div>
+      )
+    } else if (block.level === 3) {
+      return(
+        <div className="flex gap-3 content-center">
+          <label className="flex-1 mt-[5px] md:mt-[10px] mb-[5px] md:mb-[10px] ">
+            <input
+              value={block.content}
+              onChange={(e) => updateBlock(index, {content: e.target.value})}
+              placeholder="見出し3"
+              className="bg-[#F7F7F7] p-3 w-full font-bold text-[16px] md:text-[18px]"
+            />
+          </label>
+            {/* 削除 */}
+          <button className="flex-none" onClick={()=>deleteBlock(index)}><DeleteOutlineIcon sx={{fontSize:"large"}}/></button>
+        </div>
+      )
+    }
   }
   if(block.type === "text") {
     return(
-      <div>
-        <h3>テキスト入力</h3>
-        <label>
-          <p>テキスト</p>
+      <div className="flex gap-3 content-center">
+        <label className="flex-1 grid mt-[5px] md:mt-[10px] mb-[5px] md:mb-[10px] ">
           <textarea
             value={block.content}
             onChange={(e) => updateBlock(index, {content: e.target.value})}
+            placeholder="テキスト入力"
+            className="w-full bg-[#F7F7F7] p-3"
           />
         </label>
 
         {/* 削除 */}
-        <button onClick={()=>deleteBlock(index)}>削除</button>
+        <button className="flex-none" onClick={()=>deleteBlock(index)}><DeleteOutlineIcon sx={{fontSize:"large"}}/></button>
 
       </div>
     )
   }
   if(block.type === "image") {
     return(
-      <div>
-        <h3>画像入力</h3>
-        <label>
-          <p>画像url</p>
+      <div className="mt-[30px] mb-[20px] flex gap-3 content-center my-[20px] md:my-[30px] ">
+        <label className="flex-1">
           <input
             value={block.src}
             onChange={(e) => updateBlock(index, {src: e.target.value})}
+            placeholder="画像アップロード先URL"
+            className="bg-[#F7F7F7] p-3 w-full"
           />
         </label>
         <label>
-          <p>alt</p>
           <input
             value={block.alt}
             onChange={(e) => updateBlock(index, {alt: e.target.value})}
+            placeholder="alt"
+            className="bg-[#F7F7F7] p-3 w-full"
           />
         </label>
 
         {/* 削除 */}
-        <button onClick={()=>deleteBlock(index)}>削除</button>
+        <button className="flex-none" onClick={()=>deleteBlock(index)}><DeleteOutlineIcon sx={{fontSize:"large"}}/></button>
 
       </div>
     )
   }
   if(block.type === "code") {
     return(
-      <div>
-        <h3>コード入力</h3>
-        <label>
-          <p>コード</p>
+      <div className="mt-[30px] mb-[20px] flex gap-3 content-center my-[20px] md:my-[30px] ">
+        <label className="flex-1">
           <textarea
             value={block.code}
             onChange={(e) => updateBlock(index, {code: e.target.value})}
+            placeholder="コードを入力..."
+            className="bg-[#1e1e1e] w-full text-white p-6 rounded-lg overflow-x-auto"
           />
         </label>
-        <label>
+
+
+        {/* <label>
           <p>行番号表示する？</p>
           <select
             value={block.showLineNumbers ? "true" : "false"}
@@ -101,10 +130,10 @@ const BlockEditor = ({block, index, updateBlock, deleteBlock}: Props) => {
             <option value="true">Show</option>
             <option value="false">Hidden</option>
           </select>
-        </label>
+        </label> */}
 
         {/* 削除 */}
-        <button onClick={()=>deleteBlock(index)}>削除</button>
+        <button className="flex-none" onClick={()=>deleteBlock(index)}><DeleteOutlineIcon sx={{fontSize:"large"}}/></button>
       </div>
     )
   }
