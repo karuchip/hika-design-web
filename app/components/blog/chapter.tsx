@@ -57,7 +57,7 @@ const Chapter = ({onePost}:Props) => {
                     `}>
                       {item.content}
                     </p>
-                    <div className="w-full h-[1px] bg-[#586869]"><span></span></div>
+                    <span className="w-full h-[1px] bg-[#586869]"><span></span></span>
                   </a>
                 </div>
               )
