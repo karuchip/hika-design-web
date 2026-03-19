@@ -29,7 +29,6 @@ const Chapter = ({onePost}:Props) => {
         // 画面上から120px以内に来た見出し
         if(rect.top <= 120) {
           currentId = heading.id;
-          console.log(currentId)
         }
       });
       setActiveHeading(currentId);
@@ -57,7 +56,7 @@ const Chapter = ({onePost}:Props) => {
                     `}>
                       {item.content}
                     </p>
-                    <span className="w-full h-[1px] bg-[#586869]"><span></span></span>
+                    <div className="w-full h-[1px] bg-[#586869]"><span></span></div>
                   </a>
                 </div>
               )
@@ -71,7 +70,7 @@ const Chapter = ({onePost}:Props) => {
                           : "text-[#586869]"
                       }
                     `}>
-                      <div className="flex gap-3"><span>・</span><span>{item.content}</span></div>
+                      <span className="flex gap-3"><span>・</span><span>{item.content}</span></span>
                     </p>
                   </a>
                 </div>
