@@ -24,9 +24,29 @@ export const metadata: Metadata = {
   },
   description:
     "Hikaのポートフォリオサイト。UIデザインやフロントエンド開発、制作事例やブログを掲載しています。",
-  keywords: ["ポートフォリオ", "UIデザイン", "フロントエンド", "React", "Next.js"],
+  keywords: ["ポートフォリオ", "UIデザイン", "UI", "UI開発", "フロントエンド", "React", "Next.js"],
   authors: [{ name: "Hika | ひか" }],
   creator: "Hika | ひか",
+  openGraph: {
+    title: "Hika Dev + Design",
+    description:
+      "UIデザインとフロントエンドを学びながらWebアプリを開発しています。",
+    url: "https://hika-design.com",
+    siteName: "Hika Dev + Design",
+    images: [
+      {
+        url: "/ogp.png", // ←ここ重要
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "ja_JP",
+    type: "website",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
