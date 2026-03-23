@@ -5,7 +5,11 @@ import { CategoryColors } from "@/src/stylecss/categoryColors"
 
 const Bloggrid = ({posts}: {posts: PostListType[]}) => {
 
-  const sortedItem = [...posts].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  console.log(posts);
+
+  const sortedItem = [...posts]
+    .filter((item) => item.published)
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 
   return (
     <>

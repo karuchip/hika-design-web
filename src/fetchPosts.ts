@@ -6,8 +6,7 @@ export const fetchPosts = async ():Promise<{data: PostListType[]|null; error:Err
   const {data, error, status}
     = await supabase
       .from('posts')
-      .select('id, created_at, title, topImage, category')
-      .eq('published', true)
+      .select('id, created_at, title, topImage, category, published')
       .order('created_at', {ascending:false});
 
   if(error) {
