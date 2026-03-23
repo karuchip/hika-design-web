@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
     },
     {
-      url: "https://hika-design.com/blog",
+      url: "https://hika-design.com/blog/show",
       lastModified: new Date(),
     },
   ];
