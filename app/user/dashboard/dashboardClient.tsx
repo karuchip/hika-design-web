@@ -5,14 +5,18 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { User } from "@supabase/supabase-js"
 import { supabase } from "@/src/lib/supabase"
-import LogoutButton from "@/app/components/user/logoutbutton"
+import LogoutButton from "@/app/components/dashboard/logoutbutton"
 import { UsePost } from "@/src/hooks/usePost"
+import PostGridAdmin from "@/app/components/dashboard/bloggridadmin"
 
 
 const DashboardClient = () => {
-  const router = useRouter()
-  const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  //投稿全件取得 カスタムフックの呼び出し
+  const {posts, loading, error} = UsePost();
 
   // ログインチェック
   useEffect(() => {
@@ -27,12 +31,13 @@ const DashboardClient = () => {
         return
       }
       setUser(user)
-      setLoading(false)
+      setLoadingUser(false)
     }
     getUser()
   }, [router])
 
-  if (loading) return <p>Loading...</p>
+
+  if (loadingUser || loading) return <p>Loading...</p>
 
   return (
     <>
@@ -43,6 +48,17 @@ const DashboardClient = () => {
 
       <p className="pt-10 text-[24px]">・ブログ</p>
       <Link href="/blog/create">ブログ作成</Link>
+
+      <p className="pt-10 text-[24px]">・ブログ一覧</p>
+      {error ? (
+        <h3>Error: {error}</h3>
+      ) : !posts ? (
+        <h3>Posts not found</h3>
+      ) : (
+        <PostGridAdmin posts={posts}/>
+      )}
+
+
     </>
   )
 }

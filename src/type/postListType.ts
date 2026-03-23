@@ -1,5 +1,5 @@
 export type PostListType = {
-  id: number;
+  id: string;
   created_at: Date;
   title: string;
   topImage: string;
