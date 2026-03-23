@@ -6,15 +6,22 @@ import Image from "next/image"
 import { CategoryColors } from "@/src/stylecss/categoryColors"
 import { supabase } from "@/src/lib/supabase"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 
 const PostGridAdmin = ({posts}: {posts: PostListType[]}) => {
+
+  const router = useRouter();
   const [postList, setPostList] = useState(posts);
 
-  const sortedItem = [...postList].sort(
-    (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  );
+  const sortedItem = [...postList]
+    .sort((a, b) =>new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+
+  // 編集
+  const handleEdit = async(postId: string) => {
+    router.push(`/blog/edit/${postId}`);
+  }
 
 
   //削除
@@ -70,7 +77,8 @@ const PostGridAdmin = ({posts}: {posts: PostListType[]}) => {
               </Link>
 
               <div className="flex gap-10">
-                {/* <button onClick={()=>handleEdit()}>編集</button> */}
+                <p className="text-[#AA3060]">{item.published ? "公開中" : "非公開"}</p>
+                <button onClick={()=>handleEdit(item.id)}>編集</button>
                 <button onClick={()=>handleDelete(item.id, item.title)}>削除</button>
               </div>
             </div>

@@ -4,4 +4,5 @@ export type PostListType = {
   title: string;
   topImage: string;
   category: "UI/UX" | "フロントエンド";
+  published: boolean;
 }

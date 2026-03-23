@@ -5,13 +5,17 @@ import { blogInputAtom } from "@/src/jotai/bloginputAtom";
 import { supabase } from "@/src/lib/supabase";
 import { useAtom } from "jotai";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js"
 import Loading from "@/app/components/common/loading";
 
 const BlogPreviewClient = () => {
 
+  // URLからパラメーター取得
+  const searchParams = useSearchParams(); //create || update
+  const mode = searchParams.get("mode")
+  const id = searchParams.get("id")
   const router = useRouter();
 
   // jotai
@@ -20,7 +24,7 @@ const BlogPreviewClient = () => {
   // ログイン情報取得
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-
+  // ログイン状態確認
   useEffect(() => {
     const getUser = async () => {
       const {
@@ -73,21 +77,40 @@ const BlogPreviewClient = () => {
       user_id: user.id
     }
 
-    const { error } = await supabase
-      .from("posts")
-      .insert([insertData])
+    // insert 処理
+    if(mode === "create") {
+      const { error } = await supabase.from("posts").insert([insertData])
 
-    if ( error ) {
-      console.error("insert error:", error);
-      return;
+      if ( error ) {
+        console.error("insert error:", error);
+        return;
+      }
+
+      if (!error) {
+        alert(type === "post" ? "投稿完了" : "下書き保存完了!")
+        setInputAtom(null) // 投稿 or 保存後にリセット
+        router.push("/blog/show") // 一覧へ
+      }
+
+    // update処理
+    } else {
+      const { error } = await supabase.from("posts").update({
+        ...insertData,
+        updated_at: new Date(),
+        })
+        .eq("id", id)
+
+      if ( error ) {
+        console.error("update error:", error);
+        return;
+      }
+
+      if (!error) {
+        alert(type === "post" ? "上書き投稿完了" : "上書き保存完了!")
+        setInputAtom(null) // 投稿 or 保存後にリセット
+        router.push("/blog/show") // 一覧へ
+      }
     }
-
-    if (!error) {
-      alert(type === "post" ? "投稿完了" : "下書き保存完了!")
-      setInputAtom(null) // 投稿 or 保存後にリセット
-      router.push("/blog/show") // 一覧へ
-    }
-
   }
 
   if(loading) return<Loading/>
@@ -113,7 +136,7 @@ const BlogPreviewClient = () => {
             onClick={()=>onSubmit("post")}
             className="w-fit my-10 py-2 px-8 bg-[#586869] text-[#ffffff] font-bold text-[20px]"
           >
-            投稿する
+            {mode === "create" ? "投稿する" : "編集する"}
           </button>
 
           <button
