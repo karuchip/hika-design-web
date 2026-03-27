@@ -72,7 +72,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                     if(one.level === 1) {
                       return (
                         <div key={one.id}>
-                          <h2 id={one.id} className="font-bold text-[22px] md:text-[30px] mt-[40px] md:mt-[73px]">{one.content}</h2>
+                          <h2 id={one.id} className="font-bold text-[22px] md:text-[30px] mt-[50px] md:mt-[90px]">{one.content}</h2>
                           <div className="w-full h-[1px] mb-[27px] bg-[#AFAFAF]">
                             <span></span>
                           </div>
@@ -81,7 +81,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                     }else if (one.level === 2) {
                       return (
                         <div key={one.id}>
-                          <h3  id={one.id} className="font-bold text-[18px] md:text-[22px] mt-[10px] md:mt-[30px] mb-[5px] md:mb-[10px]">{one.content}</h3>
+                          <h3  id={one.id} className="font-bold text-[18px] md:text-[24px] mt-[40px] md:mt-[30px] ">{one.content}</h3>
                         </div>
                       )
                     }else if (one.level === 3) {
@@ -96,14 +96,14 @@ const BlogDetailFormat = ({onePost}:Props) => {
                   } else if (one.type === "text") {
                     return (
                       <div key={one.id}>
-                        <p className="text-[16px] md:text-[20px] my-[10px]">{one.content}</p>
+                        <p className="text-[16px] md:text-[20px] mt-[5px] mb-[30px]">{one.content}</p>
                       </div>
                     )
 
                   // 画像
                   } else if (one.type === "image") {
                     return (
-                      <div key={one.id} className="w-full overflow-hidden my-[20px] md:my-[30px]">
+                      <div key={one.id} className="w-full overflow-hidden my-[10px] md:my-[20px]">
                         <Image
                           height={300}
                           width={300}
