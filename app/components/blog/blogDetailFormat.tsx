@@ -122,6 +122,27 @@ const BlogDetailFormat = ({onePost}:Props) => {
                         <CodeBlock code={one.code}/>
                       </div>
                     )
+
+                    // リスト
+                  } else if (one.type === "list") {
+
+                    return(
+                      <div key={one.id}>
+                        {one.listStyle === "decimal" ? (
+                          <ol className="list-decimal list-inside pl-[20px]">
+                            {one.items.map((item) => (
+                              <li key={item.id} className="py-2">{item.text}</li>
+                            ))}
+                          </ol>
+                        ):(
+                          <ul className="list-disc list-inside pl-[20px]">
+                            {one.items.map((item) => (
+                              <li key={item.id} className="py-2">{item.text}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )
                   }
               })}
             </div>

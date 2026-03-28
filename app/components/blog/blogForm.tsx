@@ -21,7 +21,7 @@ type Props = {
 }
 
 type CategoryType = "UI/UX" | "フロントエンド";
-type AddBlockType = "h1" | "h2" | "h3" | "text" | "image" | "code";
+type AddBlockType = "h1" | "h2" | "h3" | "text" | "image" | "code" | "list";
 
 const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, initialBlocks, mode}: Props) => {
 
@@ -58,6 +58,10 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
   // jotai
   const [inputAtom, setInputAtom] = useAtom(blogInputAtom);
 
+  useEffect(() => {
+    console.log("blocks:", inputAtom?.blocks)
+  }, [inputAtom])
+
   // jotaiとuseEffectの同期処理
   useEffect(() => {
     const stateSetter = () => {
@@ -86,6 +90,8 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
       category
     });
 
+    console.log(blocks);
+
     if(mode === "create") {
       router.push("/blog/preview?mode=create");
     } else {
@@ -102,59 +108,75 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
 
 
   // (追加) block要素追加
-    const addBlock = (type:AddBlockType | null) => {
-      let newBlock: BlockType
+  const addBlock = (type:AddBlockType | null) => {
+    let newBlock: BlockType | null = null
 
-      if (type === "h1") {
-        newBlock = {
-          id: crypto.randomUUID(),
-          type: "heading",
-          level: 1,
-          content: "",
-          order: blocks.length,
-        }
-      } else if (type === "h2") {
-        newBlock = {
-          id: crypto.randomUUID(),
-          type: "heading",
-          level: 2,
-          content: "",
-          order: blocks.length,
-        }
-      } else if (type === "h3") {
-        newBlock = {
-          id: crypto.randomUUID(),
-          type: "heading",
-          level: 3,
-          content: "",
-          order: blocks.length,
-        }
-      } else if (type === "text") {
-        newBlock = {
-          id: crypto.randomUUID(),
-          type: "text",
-          content: "",
-          order: blocks.length,
-        }
-      } else if (type === "image") {
-        newBlock = {
-          id: crypto.randomUUID(),
-          type: "image",
-          src: "",
-          alt: "",
-          order: blocks.length,
-        }
-      } else {
-        newBlock = {
-          id: crypto.randomUUID(),
-          type: "code",
-          code: "",
-          showLineNumbers: false,
-          order: blocks.length,
-        }
+    if (type === "h1") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "heading",
+        level: 1,
+        content: "",
+        order: blocks.length,
       }
+    } else if (type === "h2") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "heading",
+        level: 2,
+        content: "",
+        order: blocks.length,
+      }
+    } else if (type === "h3") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "heading",
+        level: 3,
+        content: "",
+        order: blocks.length,
+      }
+    } else if (type === "text") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "text",
+        content: "",
+        order: blocks.length,
+      }
+    } else if (type === "image") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "image",
+        src: "",
+        alt: "",
+        order: blocks.length,
+      }
+    } else if (type === "code") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "code",
+        code: "",
+        showLineNumbers: false,
+        order: blocks.length,
+      }
+    } else if (type === "list") {
+      newBlock = {
+        id: crypto.randomUUID(),
+        type: "list",
+        listStyle: "decimal",
+        items: [
+          {
+            id: crypto.randomUUID(),
+            text: "",
+            order: 1,
+          }
+        ],
+        order: blocks.length,
+      }
+    }
+    if (newBlock) {
       setBlocks([...blocks, newBlock])
     }
+  }
 
     // (追加) block要素削除
     const deleteBlock = (index:number) => {
@@ -224,11 +246,12 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
           <div>
 
             <div className="mb-5">
-              <p className="text-[18px] font-bold mb-2 text-[#586869]">フォント選択</p>
+              <p className="text-[18px] font-bold mb-2 text-[#586869]">テキスト選択</p>
               <button className="block text-[22px] md:text-[30px] mb-3 font-bold" onClick={() => addBlock("h1")}>+ 見出し1</button>
               <button className="block text-[18px] md:text-[22px] mb-3 font-bold" onClick={() => addBlock("h2")}>+ 見出し2</button>
               <button className="block  text-[16px] md:text-[18px] mb-5 font-bold" onClick={() => addBlock("h3")}>+ 見出し3</button>
               <button className="block  text-[16px] md:text-[18px] mb-5 border border-[#C3C3C3] w-[180px] py-1 px-3 text-left bg-[#ffffff]" onClick={() => addBlock("text")}>+ テキスト</button>
+              <button className="block  text-[16px] md:text-[18px] mb-5 border border-[#C3C3C3] w-[180px] py-1 px-3 text-left bg-[#ffffff]" onClick={() => addBlock("list")}>+ リスト</button>
             </div>
 
             {/* 区切り線 */}

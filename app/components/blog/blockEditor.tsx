@@ -1,5 +1,6 @@
-import { BlockType } from "@/src/type/postTypeBlocks"
+import { BlockType, ListItem } from "@/src/type/postTypeBlocks"
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
 
 type Props = {
   block: BlockType;
@@ -10,8 +11,45 @@ type Props = {
 
 const BlockEditor = ({block, index, updateBlock, deleteBlock}: Props) => {
 
-  if(block.type === "heading") {
+  // リスト　行追加処理
+  const addListItem = (index:number, block:BlockType) => {
+    if(block.type === "list") {
+      const newOrder = block.items.length + 1;
+      const newItem :ListItem = {
+        id: crypto.randomUUID(),
+        text: "",
+        order: newOrder
+      };
+      updateBlock(
+        index,
+        {
+          ...block,
+          items: [...block.items, newItem]
+        }
+      )
+    }
+  }
 
+  // リスト　変更処理
+  const updateListItem = (itemIndex:number, newItemText:string, block:BlockType) => {
+    if (block.type === "list") {
+
+      const newItems = block.items.map((item, idx) => {
+        if(idx === itemIndex) {
+          return {...item, text: newItemText}
+        }
+        return item;
+      })
+      updateBlock(
+        block.order,
+        {
+        ...block,
+        items: newItems,
+      })
+    }
+  }
+
+  if(block.type === "heading") {
 
     if (block.level === 1) {
       return(
@@ -134,6 +172,47 @@ const BlockEditor = ({block, index, updateBlock, deleteBlock}: Props) => {
 
         {/* 削除 */}
         <button className="flex-none" onClick={()=>deleteBlock(index)}><DeleteOutlineIcon sx={{fontSize:"large"}}/></button>
+      </div>
+    )
+  }
+  if(block.type === "list") {
+    return(
+      <div>
+        <button onClick={() => addListItem(index, block)}>行を追加</button>
+
+        <select
+          value={block.listStyle}
+          onChange={(e)=>updateBlock(index, {listStyle: e.target.value as "disc" | "decimal"})}
+          className="p-3 bg-[#F7F7F7] w-[180px] text-[20px]"
+        >
+          <option value={"decimal"}>decimal</option>
+          <option value={"disc"}>disc</option>
+        </select>
+
+        <label>
+          {[...block.items]
+            .sort((a,b) => a.order - b.order)
+            .map((item, itemIndex) => {
+            return (
+              <div key={item.id || itemIndex} className="flex items-center gap-2 mb-1">
+                {/* ここで listStyle に応じて表示を切り替える！ */}
+                <span className="w-6 text-center shrink-0">
+                  {block.listStyle === "decimal"
+                    ? `${itemIndex + 1}.` // 数字の場合： 1. 2. 3.
+                    : "•"                 // 黒丸の場合： ・
+                  }
+                </span>
+
+                <input
+                  value={item.text}
+                  className="bg-[#C36782] outline-none px-2 py-1 rounded w-full"
+                  onChange={(e) => updateListItem(itemIndex, e.target.value, block)}
+                  placeholder="リスト項目を入力..."
+                />
+              </div>
+            );
+          })}
+        </label>
       </div>
     )
   }
