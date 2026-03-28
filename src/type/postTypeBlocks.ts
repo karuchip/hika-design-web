@@ -1,3 +1,10 @@
+export type ListItem = {
+  id: string;      // 各行を識別するID（Reactのkeyなどで必須）
+  text: string;    // 入力内容
+  order: number;   // 行番号（1, 2, 3...）
+};
+
+
 export type BlockType =
   | {
       id: string
@@ -32,3 +39,10 @@ export type BlockType =
       code: string
       showLineNumbers?: boolean //行番号を表示するか？
     }
+  | {
+      id: string
+      order: number
+      type: "list"
+      listStyle: "disc" | "decimal"
+      items: ListItem[];
+  }

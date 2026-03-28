@@ -89,7 +89,7 @@ const BlogPreviewClient = () => {
       if (!error) {
         alert(type === "post" ? "投稿完了" : "下書き保存完了!")
         setInputAtom(null) // 投稿 or 保存後にリセット
-        router.push("/blog/show") // 一覧へ
+        router.push("/user/dashboard") // 管理者画面へ
       }
 
     // update処理
@@ -108,7 +108,7 @@ const BlogPreviewClient = () => {
       if (!error) {
         alert(type === "post" ? "上書き投稿完了" : "上書き保存完了!")
         setInputAtom(null) // 投稿 or 保存後にリセット
-        router.push("/blog/show") // 一覧へ
+        router.push("/user/dashboard") // 管理者画面へ
       }
     }
   }
@@ -136,7 +136,7 @@ const BlogPreviewClient = () => {
             onClick={()=>onSubmit("post")}
             className="w-fit my-10 py-2 px-8 bg-[#586869] text-[#ffffff] font-bold text-[20px]"
           >
-            {mode === "create" ? "投稿する" : "編集する"}
+            {mode === "create" ? "投稿する" : "編集を確定して投稿する"}
           </button>
 
           <button
