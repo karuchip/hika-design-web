@@ -106,7 +106,7 @@ const BlogPreviewClient = () => {
       }
 
       if (!error) {
-        alert(type === "post" ? "上書き投稿完了" : "上書き保存完了!")
+        alert(type === "post" ? "編集完了" : "下書き保存完了!")
         setInputAtom(null) // 投稿 or 保存後にリセット
         router.push("/user/dashboard") // 管理者画面へ
       }
