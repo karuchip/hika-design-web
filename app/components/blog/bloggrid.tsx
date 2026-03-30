@@ -13,33 +13,41 @@ const Bloggrid = ({posts}: {posts: PostListType[]}) => {
   return (
     <>
       {/* grid-cols-1 (スマホ) / md:grid-cols-2 (タブレット) / lg:grid-cols-3 (PC) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center px-10">
         {sortedItem
           .map(item => (
+            <div key={item.id} className="w-[320px]">
+              <Link href={`/blog/show/${item.id}`} className="w-[320px] group relative z-10">
+              <div className="absolute top-0 left-0 w-full h-full group-hover:bg-indigo-500/10 z-1 transition-colors duration-100"></div>
 
-            <Link key={item.id} href={`/blog/show/${item.id}`}>
+                <div className="w-[320px] p-3">
+                  <div className="flex justify-between">
+                    <p className={`w-fit px-[40px] py-[3px] text-[#ffffff] text-[18px] ${CategoryColors[item.category] || CategoryColors.default}`}>
+                      {item.category}
+                    </p>
+                    <p className="w-fit text-[#586869] text-[18px]">{new Date(item.created_at).toLocaleDateString()}</p>
+                  </div>
 
-              <div className="w-[300px]">
-                <p className="w-[300px] text-[#586869] text-right my-[5px]">{new Date(item.created_at).toLocaleDateString()}</p>
-                <div className="relative">
-                  <p className={`w-fit px-[40px] py-[3px] absolute z-[1] text-[#ffffff] rounded-lg text-[18px] ${CategoryColors[item.category] || CategoryColors.default}`}>
-                    {item.category}
-                  </p>
-
-                  <div className="relative w-[300px] z-[0] h-[180px] aspect-video overflow-hidden rounded-lg">
-                    <Image
-                      src={item.topImage}
-                      alt="ブログトップ画像"
-                      fill
-                      className="object-cover object-center"
+                  <div className="flex justify-between gap-3 mt-4">
+                    <p className="w-[200px] text-[#586869] text-[18px] font-bold break-words">{item.title}</p>
+                    <div className="w-[80px] h-[80px] aspect-square overflow-hidden flex-shrink-0 relative">
+                      <Image
+                        src={item.topImage}
+                        alt="ブログトップ画像"
+                        fill // 親要素の80x80に合わせるならfillが便利です
+                        sizes="80px"
+                        className="object-cover object-center"
                       />
+                    </div>
                   </div>
                 </div>
+              </Link>
 
-                <p className="my-[10px] w-[300px] text-[#586869] text-[18px] font-bold break-words">{item.title}</p>
+              <div className="w-full h-[3px] bg-indigo-500/20 my-3">
+                <span></span>
               </div>
 
-            </Link>
+            </div>
 
         ))}
       </div>
