@@ -5,6 +5,7 @@ import Header from "./components/common/header";
 import Footer from "./components/common/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import {Providers} from "@/app/components/provider/jotaiProvider"
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,7 +56,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
+      <head>
+        <Script async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9619029559934703"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
