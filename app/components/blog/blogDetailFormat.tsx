@@ -153,7 +153,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
         <div>
           {/* プロフィール */}
           <div className="flex justify-center lg:block my-[80px] lg:my-0">
-            <div className="w-[300px] text-[#586869] bg-[#FDFAEF] p-[20px] rounded-3xl shadow-lg">
+            <div className="w-[300px] text-[#ffffff] bg-indigo-500/60 p-[20px] rounded-3xl shadow-lg">
               <div className="w-[100px] h-[100px] overflow-hidden mx-auto">
                 <Image
                   height={100}
