@@ -38,7 +38,7 @@ const Header = () => {
         </Link>
         <div className="flex text-[18px]">
           <p className="mr-10"><Link href="/blog/show">Blog</Link></p>
-          <p><Link href="/">Portfolio</Link></p>
+          <p><Link href="/#portfolio">Portfolio</Link></p>
         </div>
       </div>
     </div>

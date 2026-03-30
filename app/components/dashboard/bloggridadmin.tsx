@@ -66,6 +66,7 @@ const PostGridAdmin = ({posts}: {posts: PostListType[]}) => {
                         src={item.topImage}
                         alt="ブログトップ画像"
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover object-center"
                         />
                     </div>
