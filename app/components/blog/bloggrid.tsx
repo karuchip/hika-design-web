@@ -5,7 +5,6 @@ import { CategoryColors } from "@/src/stylecss/categoryColors"
 
 const Bloggrid = ({posts}: {posts: PostListType[]}) => {
 
-  console.log(posts);
 
   const sortedItem = [...posts]
     .filter((item) => item.published)

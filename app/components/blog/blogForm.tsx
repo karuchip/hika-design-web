@@ -58,10 +58,6 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
   // jotai
   const [inputAtom, setInputAtom] = useAtom(blogInputAtom);
 
-  useEffect(() => {
-    console.log("blocks:", inputAtom?.blocks)
-  }, [inputAtom])
-
   // jotaiとuseEffectの同期処理
   useEffect(() => {
     const stateSetter = () => {
@@ -90,7 +86,6 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
       category
     });
 
-    console.log(blocks);
 
     if(mode === "create") {
       router.push("/blog/preview?mode=create");
