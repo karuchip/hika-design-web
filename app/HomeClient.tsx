@@ -52,7 +52,7 @@ const HomeClient = () => {
 
         {/* portfolio */}
         <FadeIn>
-          <section id="portfolio" className="md:mx-[75px] mb-30 scroll-mt-0">
+          <section id="portfolio" className="md:mx-[75px] mb-30 scroll-mt-top">
             <div className="mx-10 md:mx-20">
               <h2 className="w-fit mx-auto mb-3 text-[42px] md:text-[56px] text-indigo-500">Portfolio</h2>
 
