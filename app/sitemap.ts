@@ -10,5 +10,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://hika-design.com/blog/show",
       lastModified: new Date(),
     },
+    {
+      url: "https://hika-design.com/contact",
+      lastModified: new Date(),
+    },
+    {
+      url: "https://hika-design.com/privacy",
+      lastModified: new Date(),
+    },
   ];
 }
