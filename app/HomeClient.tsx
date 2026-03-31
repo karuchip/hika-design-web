@@ -40,7 +40,7 @@ const HomeClient = () => {
         <FadeIn>
           <section className="md:mx-[75px] md:flex my-20 md:mt-40 py-[40px]">
             <div className="w-full">
-              <h2 className="w-fit mx-auto mb-3 text-[36px] md:text-[48px]">Blog</h2>
+              <h2 className="w-fit mx-auto mb-3 text-[42px] md:text-[56px] text-indigo-500">Blog</h2>
 
               <BlogLatest/>
               <div className="w-fit mx-auto mt-10">
@@ -52,9 +52,9 @@ const HomeClient = () => {
 
         {/* portfolio */}
         <FadeIn>
-          <section id="portfolio" className="md:mx-[75px] mb-30 scroll-mt-10">
+          <section id="portfolio" className="md:mx-[75px] mb-30 scroll-mt-0">
             <div className="mx-10 md:mx-20">
-              <h2 className="w-fit mx-auto mb-3 text-[36px] md:text-[48px]">Portfolio</h2>
+              <h2 className="w-fit mx-auto mb-3 text-[42px] md:text-[56px] text-indigo-500">Portfolio</h2>
 
               <Link
                 href="https://fire.hika-design.com/"
@@ -117,8 +117,8 @@ const HomeClient = () => {
             </div>
             <div className="flex items-center h-[357px] md:w-[680px] md:h-[475px] bg-indigo-500/60 text-[#ffffff] items-center justify-center">
               <div>
-                <h2 className="w-fit mx-auto mb-5 text-[36px] md:text-[48px]">Profile</h2>
-                <div className="w-[364px] md:px-[20px] md:text-[20px]">
+                <h2 className="w-fit mx-auto mb-5 text-[42px] md:text-[56px]">Profile</h2>
+                <div className="md:w-[364px] px-10 md:px-[20px] md:text-[20px]">
                   <p className="mb-3">UI/UXデザインとフロントエンドを学びながら、React / Next.js / TypeScript / Supabase を使ってWebアプリを個人開発しています。</p>
                   <p>茨城 / 26歳</p>
                 </div>
