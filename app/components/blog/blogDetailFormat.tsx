@@ -131,7 +131,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                     } else if (one.type === "list") {
 
                       return(
-                        <div key={one.id}>
+                        <div key={one.id} className="text-[16px] md:text-[18px]">
                           {one.listStyle === "decimal" ? (
                             <ol className="list-decimal list-inside pl-[20px]">
                               {one.items.map((item) => (
