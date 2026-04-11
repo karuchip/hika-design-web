@@ -10,5 +10,5 @@ export type PostType = {
   userId: UUID;
   title: string;
   topImage: string;
-  category: "UI/UX" | "フロントエンド";
+  category: "UI/UX" | "フロントエンド" | "SEO" | "雑記";
 }

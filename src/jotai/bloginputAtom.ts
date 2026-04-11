@@ -7,6 +7,6 @@ type blogInputAtomType = {
   topImage: string;
   blocks: BlockType[];
   published: boolean;
-  category: "UI/UX" | "フロントエンド";
+  category: "UI/UX" | "フロントエンド" | "SEO" | "雑記";
 }
 export const blogInputAtom = atom<blogInputAtomType | null>(null);

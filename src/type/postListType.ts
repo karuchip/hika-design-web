@@ -3,6 +3,6 @@ export type PostListType = {
   created_at: Date;
   title: string;
   topImage: string;
-  category: "UI/UX" | "フロントエンド";
+  category: "UI/UX" | "フロントエンド" | "SEO" | "雑記";
   published: boolean;
 }
