@@ -15,12 +15,12 @@ type Props = {
   initialId?: string;
   initialTitle?: string;
   initialTopImage?: string;
-  initialCategory?: "UI/UX" | "フロントエンド"
+  initialCategory?: "UI/UX" | "フロントエンド" | "SEO" | "雑記"
   initialBlocks?:BlockType[];
   mode: "create" | "edit";
 }
 
-type CategoryType = "UI/UX" | "フロントエンド";
+type CategoryType = "UI/UX" | "フロントエンド" | "SEO" | "雑記";
 type AddBlockType = "h1" | "h2" | "h3" | "text" | "image" | "code" | "list";
 
 const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, initialBlocks, mode}: Props) => {
@@ -229,6 +229,8 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
             >
               <option value={"UI/UX"}>UI/UX</option>
               <option value={"フロントエンド"}>フロントエンド</option>
+              <option value={"SEO"}>SEO</option>
+              <option value={"雑記"}>雑記</option>
             </select>
           </div>
 
