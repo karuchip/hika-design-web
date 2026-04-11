@@ -10,7 +10,7 @@ export const fetchPostLatest = async (): Promise<{data: PostListType[]|null; err
       .select('id, created_at, title, topImage, category, published')
       .eq('published', true)
       .order('created_at', {ascending:false})
-      .limit(4)
+      .limit(6)
 
   if(error) {
     return {data: null, error: new Error(error.message), status};
