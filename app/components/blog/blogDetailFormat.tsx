@@ -14,7 +14,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
   return(
     <>
 
-      <div className="lg:flex lg:gap-[40px] lg:justify-center">
+      <div className="lg:flex lg:gap-[60px] lg:justify-center">
 
         {/* 左サイド */}
         <div className="mb-[20px] lg:mb-[200px]">
@@ -31,13 +31,13 @@ const BlogDetailFormat = ({onePost}:Props) => {
               />
             </div>
 
-            <div className="w-max-[330px] md:max-w-[700px] md:max-w-[600px] p-[20px] bg-[#ffffff] mx-[16px] md:mx-[32px] py-[16px] md:py-[32px]">
+            <div className="w-max-[330px] md:max-w-[600px] md:max-w-[760px] p-[20px] md:p-[40px] bg-[#ffffff] mx-[16px] md:mx-auto py-[16px] md:py-[32px]">
 
 
               {/* ラベル */}
               <div className="flex justify-between mb-[16px] items-end">
                 {/* カテゴリー */}
-                <p className={`w-fit px-[20px] py-[3px] text-[#ffffff] text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
+                <p className={`w-fit px-[10px] py-[1px] text-[#ffffff] text-[14px] md:text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
                   {onePost.category}
                 </p>
                 {/* 日付 */}
@@ -48,7 +48,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
               <h1 className="w-full text-[28px] md:text-[40px] font-bold mb-[15px] break-words">{onePost.title}</h1>
 
               {/* 区切り棒 */}
-              <div className="w-full h-[7px] bg-[#FCFCFC]">
+              <div className="w-full h-[7px] bg-gray-500/20">
                 <span></span>
               </div>
 
@@ -58,7 +58,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
               </div>
 
               {/* (mbのみ表示) 区切り棒 */}
-              <div className="lg:hidden w-full h-[7px] bg-[#FCFCFC]">
+              <div className="lg:hidden w-full h-[7px] bg-gray-500/20">
                 <span></span>
               </div>
 
@@ -76,7 +76,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                       if(one.level === 1) {
                         return (
                           <div key={one.id}>
-                            <h2 id={one.id} className="font-bold text-[22px] md:text-[30px] mt-[50px] md:mt-[90px]">{one.content}</h2>
+                            <h2 id={one.id} className="font-bold text-[24px] md:text-[30px] mt-[50px] md:mt-[90px]">{one.content}</h2>
                             <div className="w-full h-[1px] mb-[27px] bg-[#AFAFAF]">
                               <span></span>
                             </div>
