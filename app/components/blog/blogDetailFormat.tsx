@@ -31,13 +31,13 @@ const BlogDetailFormat = ({onePost}:Props) => {
               />
             </div>
 
-            <div className="w-max-[330px] md:max-w-[800px] md:max-w-[600px] bg-[#ffffff] mx-[16px] md:mx-[32px] py-[16px] md:py-[32px]">
+            <div className="w-max-[330px] md:max-w-[700px] md:max-w-[600px] p-[20px] bg-[#ffffff] mx-[16px] md:mx-[32px] py-[16px] md:py-[32px]">
 
 
               {/* ラベル */}
               <div className="flex justify-between mb-[16px] items-end">
                 {/* カテゴリー */}
-                <p className={`w-fit px-[40px] py-[3px] text-[#ffffff] text-[18px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
+                <p className={`w-fit px-[20px] py-[3px] text-[#ffffff] text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
                   {onePost.category}
                 </p>
                 {/* 日付 */}
@@ -45,7 +45,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
               </div>
 
               {/* タイトル */}
-              <h1 className="w-full text-[32px] md:text-[40px] font-bold mb-[15px] break-words">{onePost.title}</h1>
+              <h1 className="w-full text-[28px] md:text-[40px] font-bold mb-[15px] break-words">{onePost.title}</h1>
 
               {/* 区切り棒 */}
               <div className="w-full h-[7px] bg-[#FCFCFC]">
@@ -85,7 +85,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                       }else if (one.level === 2) {
                         return (
                           <div key={one.id}>
-                            <h3  id={one.id} className="font-bold text-[18px] md:text-[24px] mt-[40px] md:mt-[30px] ">{one.content}</h3>
+                            <h3  id={one.id} className="font-bold text-[18px] md:text-[24px] mt-[40px] md:mt-[60px] mb-[10px]">{one.content}</h3>
                           </div>
                         )
                       }else if (one.level === 3) {
@@ -100,7 +100,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                     } else if (one.type === "text") {
                       return (
                         <div key={one.id}>
-                          <p className="text-[16px] md:text-[20px] mt-[5px] mb-[30px]">{one.content}</p>
+                          <p className="text-[16px] md:text-[18px] mt-[5px] mb-[20px]">{one.content}</p>
                         </div>
                       )
 
@@ -133,13 +133,13 @@ const BlogDetailFormat = ({onePost}:Props) => {
                       return(
                         <div key={one.id} className="text-[16px] md:text-[18px]">
                           {one.listStyle === "decimal" ? (
-                            <ol className="list-decimal list-inside pl-[20px]">
+                            <ol className="list-decimal list-outside pl-[20px]">
                               {one.items.map((item) => (
                                 <li key={item.id} className="py-2">{item.text}</li>
                               ))}
                             </ol>
                           ):(
-                            <ul className="list-disc list-inside pl-[20px]">
+                            <ul className="list-disc list-outside pl-[20px]">
                               {one.items.map((item) => (
                                 <li key={item.id} className="py-2">{item.text}</li>
                               ))}
