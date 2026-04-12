@@ -22,10 +22,10 @@ const Bloggrid = ({posts}: {posts: PostListType[]}) => {
 
                 <div className="w-[320px] p-3">
                   <div className="flex justify-between">
-                    <p className={`w-fit px-[20px] py-[3px] text-[#ffffff] text-[18px] ${CategoryColors[item.category] || CategoryColors.default}`}>
+                    <p className={`w-fit text-[14px] md:text-[16px] px-[10px] py-[1px] text-[#ffffff] ${CategoryColors[item.category] || CategoryColors.default}`}>
                       {item.category}
                     </p>
-                    <p className="w-fit text-[#586869] text-[16px]">{new Date(item.created_at).toLocaleDateString()}</p>
+                    <p className="w-fit text-[#586869] text-[14px] md:text-[16px]">{new Date(item.created_at).toLocaleDateString()}</p>
                   </div>
 
                   <div className="flex justify-between gap-3 mt-4">
