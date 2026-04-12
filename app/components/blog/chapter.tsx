@@ -70,7 +70,7 @@ const Chapter = ({onePost}:Props) => {
                           : "text-[#586869]"
                       }
                     `}>
-                      <span className="flex gap-3"><span>・</span><span>{item.content}</span></span>
+                      <span className="flex gap-3"><span>{item.content}</span></span>
                     </p>
                   </a>
                 </div>
