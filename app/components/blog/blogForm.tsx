@@ -2,7 +2,7 @@
 
 import { CategoryColors } from "@/src/stylecss/categoryColors";
 import { BlockType } from "@/src/type/postTypeBlocks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BlockEditor from "./blockEditor";
 import { useAtom } from "jotai";
 import { blogInputAtom } from "@/src/jotai/bloginputAtom";
@@ -30,6 +30,10 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
   const [topImage, setTopImage] = useState(initialTopImage || "");
   const [category, setCategory] = useState(initialCategory || "UI/UX");
   const [blocks, setBlocks] = useState<BlockType[]>(initialBlocks || []);
+  // テキストボックスがfocusされたかどうか
+  const [seletedText, setSelectedText] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null!);
+
   // router
   const router = useRouter();
 
@@ -247,7 +251,31 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
               <button className="block text-[22px] md:text-[30px] mb-3 font-bold" onClick={() => addBlock("h1")}>+ 見出し1</button>
               <button className="block text-[18px] md:text-[22px] mb-3 font-bold" onClick={() => addBlock("h2")}>+ 見出し2</button>
               <button className="block  text-[16px] md:text-[18px] mb-5 font-bold" onClick={() => addBlock("h3")}>+ 見出し3</button>
-              <button className="block  text-[16px] md:text-[18px] mb-5 border border-[#C3C3C3] w-[180px] py-1 px-3 text-left bg-[#ffffff]" onClick={() => addBlock("text")}>+ テキスト</button>
+
+              <div className="w-full p-2 mb-6 bg-indigo-500/10">
+                <button className="block  text-[16px] md:text-[18px] mb-3 border border-[#C3C3C3] w-[165px] py-1 px-3 text-left bg-[#ffffff]" onClick={() => addBlock("text")}>+ テキスト</button>
+
+                {seletedText && (
+                  <div
+                  ref={containerRef}
+                  tabIndex={-1}
+                    className="bg-[#ffffff] p-3"
+                  >
+                    <p className="mb-1 text-[14px]">URL追加</p>
+                    <input className="w-full border border-indigo-500/50 mb-3 p-1" placeholder="Enter URL..."/>
+                    <input className="w-full border border-indigo-500/50 mb-3 p-1" placeholder="Enter 表示名..."/>
+                    <div className="flex justify-center">
+                      <button
+                        className="bg-indigo-500 text-[#ffffff] w-fit px-3 mx-auto"
+                      >
+                        追加
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
               <button className="block  text-[16px] md:text-[18px] mb-5 border border-[#C3C3C3] w-[180px] py-1 px-3 text-left bg-[#ffffff]" onClick={() => addBlock("list")}>+ リスト</button>
             </div>
 
@@ -322,6 +350,8 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
                 index={index}
                 updateBlock={updateBlock}
                 deleteBlock={deleteBlock}
+                setSelectedText={setSelectedText}
+                containerRef={containerRef}
               />
             ))}
           </div>

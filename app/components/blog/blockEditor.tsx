@@ -1,5 +1,6 @@
 import { BlockType, ListItem } from "@/src/type/postTypeBlocks"
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { Dispatch, RefObject, SetStateAction, FocusEvent } from "react";
 
 
 type Props = {
@@ -7,9 +8,11 @@ type Props = {
   index: number;
   updateBlock: (index: number, newData: Partial<BlockType>) => void;
   deleteBlock: (index: number) => void;
+  setSelectedText: Dispatch<SetStateAction<boolean>>;
+  containerRef: RefObject<HTMLDivElement>
 }
 
-const BlockEditor = ({block, index, updateBlock, deleteBlock}: Props) => {
+const BlockEditor = ({block, index, updateBlock, deleteBlock, setSelectedText, containerRef}: Props) => {
 
   // リスト　行追加処理
   const addListItem = (index:number, block:BlockType) => {
@@ -47,6 +50,15 @@ const BlockEditor = ({block, index, updateBlock, deleteBlock}: Props) => {
         items: newItems,
       })
     }
+  }
+
+  // input for textからフォーカスを外した時の処理
+  const handleBlur = (e: FocusEvent<HTMLTextAreaElement>) => {
+    // クリック先がcontainRef(パネル)の中であれば、閉じない
+    if(containerRef.current && containerRef.current.contains(e.relatedTarget)) {
+      return;
+    }
+    setSelectedText(false);
   }
 
   if(block.type === "heading") {
@@ -109,6 +121,8 @@ const BlockEditor = ({block, index, updateBlock, deleteBlock}: Props) => {
           <textarea
             value={block.content}
             onChange={(e) => updateBlock(index, {content: e.target.value})}
+            onFocus={() => setSelectedText(true)}
+            onBlur={handleBlur}
             placeholder="テキスト入力"
             className="w-full bg-[#F7F7F7] p-3"
           />
