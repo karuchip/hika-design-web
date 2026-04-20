@@ -4,6 +4,7 @@ import CodeBlock from "@/app/components/common/codeblock";
 import Image from "next/image"
 import Chapter from "@/app/components/blog/chapter";
 import Link from "next/link";
+import parseTextWithLinks from "../common/parseTextWithLinks";
 
 type Props = {
   onePost: PostType
@@ -100,7 +101,9 @@ const BlogDetailFormat = ({onePost}:Props) => {
                     } else if (one.type === "text") {
                       return (
                         <div key={one.id}>
-                          <p className="text-[16px] md:text-[18px] mt-[5px] mb-[20px]">{one.content}</p>
+                          <div className="text-[16px] md:text-[18px] mt-[5px] mb-[20px]">
+                            {parseTextWithLinks(one.content)}
+                          </div>
                         </div>
                       )
 

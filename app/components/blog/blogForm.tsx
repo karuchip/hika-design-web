@@ -32,7 +32,19 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
   const [blocks, setBlocks] = useState<BlockType[]>(initialBlocks || []);
   // テキストボックスがfocusされたかどうか
   const [seletedText, setSelectedText] = useState(false);
+  // パネル全体を参照するためのref
   const containerRef = useRef<HTMLDivElement>(null!);
+  // どのテキストボックスにfocusしているかを保存する
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // URLと表示名を保持するuseState
+  const [url, setUrl] = useState("");
+  const [label, setLabel] = useState("");
+
+  const textareaRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
+  const setTextareaRef = (index: number, el: HTMLTextAreaElement | null) => {
+    textareaRefs.current[index] = el;
+  };
 
   // router
   const router = useRouter();
@@ -210,6 +222,38 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
       setBlocks(newBlocks);
     }
 
+    // テキストにURLを追加する処理
+    const addURLtoText = (url: string, label: string) => {
+      if (activeIndex === null) return;
+      if (blocks[activeIndex].type !== "text") return
+
+      const textarea = textareaRefs.current[activeIndex];
+      if (!textarea) return;
+
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+
+      const currentText = blocks[activeIndex].content;
+
+      const before = currentText.slice(0, start);
+      const selected = currentText.slice(start, end);
+      const after = currentText.slice(end);
+
+      // 選択されてたらそれをlabelに優先
+      const linkText = selected || label;
+
+      const newText = `${before}[${linkText}](${url})${after}`;
+
+      updateBlock(activeIndex, { content: newText });
+
+      // カーソル位置をリンクの後ろに移動
+      setTimeout(() => {
+        textarea.focus();
+        const pos = start + `[${linkText}](${url})`.length;
+        textarea.setSelectionRange(pos, pos);
+      }, 0);
+    };
+
     if(loading) {
       return<Loading/>
     }
@@ -262,11 +306,22 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
                     className="bg-[#ffffff] p-3"
                   >
                     <p className="mb-1 text-[14px]">URL追加</p>
-                    <input className="w-full border border-indigo-500/50 mb-3 p-1" placeholder="Enter URL..."/>
-                    <input className="w-full border border-indigo-500/50 mb-3 p-1" placeholder="Enter 表示名..."/>
+                    <input
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                      className="w-full border border-indigo-500/50 mb-3 p-1"
+                      placeholder="Enter URL..."
+                    />
+                    <input
+                      value={label}
+                      onChange={(e) => setLabel(e.target.value)}
+                      className="w-full border border-indigo-500/50 mb-3 p-1"
+                      placeholder="Enter 表示名..."
+                    />
                     <div className="flex justify-center">
                       <button
                         className="bg-indigo-500 text-[#ffffff] w-fit px-3 mx-auto"
+                        onClick={()=>addURLtoText(url, label)}
                       >
                         追加
                       </button>
@@ -352,6 +407,8 @@ const BlogForm = ({initialId, initialTitle, initialTopImage, initialCategory, in
                 deleteBlock={deleteBlock}
                 setSelectedText={setSelectedText}
                 containerRef={containerRef}
+                setActiveIndex={setActiveIndex}
+                setTextareaRef={setTextareaRef}
               />
             ))}
           </div>

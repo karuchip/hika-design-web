@@ -9,10 +9,12 @@ type Props = {
   updateBlock: (index: number, newData: Partial<BlockType>) => void;
   deleteBlock: (index: number) => void;
   setSelectedText: Dispatch<SetStateAction<boolean>>;
-  containerRef: RefObject<HTMLDivElement>
+  containerRef: RefObject<HTMLDivElement>;
+  setActiveIndex: Dispatch<SetStateAction<number | null>>
+  setTextareaRef:  (index: number, el: HTMLTextAreaElement | null) => void
 }
 
-const BlockEditor = ({block, index, updateBlock, deleteBlock, setSelectedText, containerRef}: Props) => {
+const BlockEditor = ({block, index, updateBlock, deleteBlock, setSelectedText, containerRef, setActiveIndex, setTextareaRef}: Props) => {
 
   // リスト　行追加処理
   const addListItem = (index:number, block:BlockType) => {
@@ -50,6 +52,12 @@ const BlockEditor = ({block, index, updateBlock, deleteBlock, setSelectedText, c
         items: newItems,
       })
     }
+  }
+
+  // テキストinputをフォーカスした時の処理
+  const handleFocus = (index:number) => {
+    setSelectedText(true);
+    setActiveIndex(index);
   }
 
   // input for textからフォーカスを外した時の処理
@@ -119,9 +127,10 @@ const BlockEditor = ({block, index, updateBlock, deleteBlock, setSelectedText, c
       <div className="flex gap-3 content-center">
         <label className="flex-1 grid mt-[5px] md:mt-[10px] mb-[5px] md:mb-[10px] ">
           <textarea
+            ref={(el) => {setTextareaRef(index, el)}}
             value={block.content}
             onChange={(e) => updateBlock(index, {content: e.target.value})}
-            onFocus={() => setSelectedText(true)}
+            onFocus={() => handleFocus(index)}
             onBlur={handleBlur}
             placeholder="テキスト入力"
             className="w-full bg-[#F7F7F7] p-3"
