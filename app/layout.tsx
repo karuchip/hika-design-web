@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Hika Dev + Design",
     images: [
       {
-        url: "/ogp.png", // ←ここ重要
+        url: "https://hika-design.com/ogp.png",
         width: 1200,
         height: 630,
       },
