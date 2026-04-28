@@ -11,7 +11,7 @@ type props = {
 const Breadcrumb = ({items}:{items:props[]}) => {
 
   return(
-    <div className="relative flex gap-[5px] text-[14px] md:text-[18px] pl-[20px] py-[15px] lg:pl-[40px] text-[#A6A6A6] mb-10 sticky top-0 bg-[#FCFCFC] shadow-md z-[10]">
+    <div className="relative flex gap-[5px] text-[14px] md:text-[18px] pl-[20px] py-[15px] lg:pl-[40px] text-[#A6A6A6] mb-10 sticky top-0 bg-[#FCFCFC] shadow-md z-[20]">
       {items.map((item, index) => (
         <span key={index}>
           {item.href ? (
