@@ -1,26 +1,39 @@
 import type { Metadata } from "next";
 import BlogDetailClient from "./BlogDetailClient";
+import { fetchOnePost } from "@/src/fetchOnePost";
 
-export const metadata: Metadata = {
-  title: "Blog詳細",
-  description: "UI/UXやフロントエンド開発の学習記録をまとめています。",
-  openGraph: {
-    title: "Blog",
-    description: "UI/UXやフロントエンド開発の学習記録をまとめています。",
-    images: [
-      {
-        url: "https://hika-design.com/ogp.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: ["https://hika-design.com/ogp.png"],
-  },
-};
 
+// 画面表示時にすぐにmetaデーターを取得
+export async function generateMetadata({params}:{params: Promise<{ id: string }>}) : Promise<Metadata> {
+  const resolvedParams = await params;
+  const {data: post} = await fetchOnePost(resolvedParams.id);
+
+  const title = post?.title ?? "Hika Dev + Design";
+  const description = "UI/UXやフロントエンド開発の学習記録をまとめています。"
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://hika-design.com/blog/show/${resolvedParams.id}`,
+      images: [
+        {
+          url: "https://hika-design.com/ogp.png",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["https://hika-design.com/opg.png"]
+    }
+  }
+}
+
+// ページ表示用
 const BlogDetailPage = async ({
   params,
 }: {
