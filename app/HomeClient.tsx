@@ -119,8 +119,8 @@ const HomeClient = () => {
               <div>
                 <h2 className="w-fit mx-auto mb-5 text-[42px] md:text-[56px]">Profile</h2>
                 <div className="md:w-[364px] px-10 md:px-[20px] md:text-[20px]">
-                  <p className="mb-3">UI/UXデザインとフロントエンドを学びながら、React / Next.js / TypeScript / Supabase を使ってWebアプリを個人開発しています。</p>
-                  <p>茨城 / 26歳</p>
+                  <p className="mb-3">UI/UXデザインとフロントエンドを学びながら、React / Next.js / TypeScript / Supabase / AI を使ってWebアプリを個人開発しています。</p>
+                  <p>関東在住 / 26歳</p>
                 </div>
               </div>
             </div>
