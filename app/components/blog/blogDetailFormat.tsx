@@ -27,7 +27,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
   return(
     <>
 
-      <div className="lg:flex lg:gap-[60px] lg:justify-center">
+      <div className="lg:flex lg:gap-[60px] lg:justify-center z-0">
 
         {/* 左サイド */}
         <div className="mb-[20px] lg:mb-[200px]">
