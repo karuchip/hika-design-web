@@ -13,7 +13,7 @@ type Props = {
 const BlogDetailFormat = ({onePost}:Props) => {
 
   // Xへの投稿文言
-  const text = `${onePost.title}|学びまとめています`;
+  const text = `【個人開発】${onePost.title} <-- 学びをまとめています!`;
   const url = `https://hika-design.com/blog/show/${onePost.id}`;
   const hashtags = "個人開発,Web開発,フロントエンド,UI,React,Next.js";
 
