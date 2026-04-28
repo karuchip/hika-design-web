@@ -48,6 +48,12 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "hika dev + design",
+    description: "UIデザインとフロントエンドの学び・個人開発の記録",
+    images: ["https://hika-design.com/ogp.png"]
+  }
 };
 
 export default function RootLayout({

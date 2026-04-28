@@ -12,6 +12,18 @@ type Props = {
 
 const BlogDetailFormat = ({onePost}:Props) => {
 
+  // Xへの投稿文言
+  const text = `${onePost.title}|学びまとめています`;
+  const url = `https://hika-design.com/blog/show/${onePost.id}`;
+  const hashtags = "個人開発,Web開発,フロントエンド,UI,React,Next.js";
+
+  const shareUrl =
+    "https://twitter.com/intent/tweet?" +
+    `text=${encodeURIComponent(text)}&` +
+    `url=${encodeURIComponent(url)}&` +
+    `hashtags=${hashtags}`;
+
+
   return(
     <>
 
@@ -161,6 +173,18 @@ const BlogDetailFormat = ({onePost}:Props) => {
             <div className="w-fit mx-auto mt-15">
               <Link href="/blog/show" className="border border-indigo-500 p-3 hover:bg-indigo-500 text-indigo-500 hover:text-[#ffffff] font-bold transition-colors duration-300">ブログ一覧に戻る</Link>
             </div>
+          </div>
+
+          {/* X投稿ボタン */}
+          <div className="flex justify-center mt-16">
+            <Link
+              href={shareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-black text-white rounded hover:bg-gray-500"
+            >
+              このブログをXでシェアする
+            </Link>
           </div>
 
         </div>
