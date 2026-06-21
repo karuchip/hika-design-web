@@ -28,8 +28,8 @@ const HomeClient = () => {
             <FadeIn>
               <div className="md:absolute md:z-[1] md:left-0 md:bottom-[-400] flex items-center h-[300px] md:max-w-[680px] md:h-[330px] bg-[#ffffff] text-indigo-500 items-center justify-center shadow-xl">
                 <div>
-                  <h1 className="w-fit text-[22px] font-bold md:text-[32px] mb-5 px-15">未経験から<br/>フロントエンド・UIデザインで<br/>仕事を得るまで</h1>
-                  <p className="px-15 md:mx-auto text-[16px] md:text-[20px]">2024年9月から趣味でWebアプリ開発を続けてきた私が、フロントエンドとUIデザインの理解を深めていく過程を記録しています</p>
+                  <h1 className="w-fit text-[20px] font-bold md:text-[32px] mb-5 px-5 md:px-15">未経験から<br/>フロントエンド × UIデザインで<br/>収益を得るまで</h1>
+                  <p className="md:mx-auto text-[13px] md:text-[16px] md:text-[20px] px-5 md:px-15">2024年9月から趣味でWebアプリを開発しています。個人開発を通して、フロントエンドとUIデザインを学び、収益化を目指す過程を記録しています。</p>
                 </div>
               </div>
             </FadeIn>
