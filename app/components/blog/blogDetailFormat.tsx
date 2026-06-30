@@ -113,7 +113,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                     } else if (one.type === "text") {
                       return (
                         <div key={one.id}>
-                          <div className="text-[16px] md:text-[18px] mt-[5px] mb-[20px]">
+                          <div className="text-[16px] md:text-[18px] mt-[5px] mb-[20px] text-sm/7 md:text-sm/8">
                             {parseTextWithLinks(one.content)}
                           </div>
                         </div>
