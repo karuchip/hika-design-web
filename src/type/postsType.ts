@@ -11,4 +11,5 @@ export type PostType = {
   title: string;
   topImage: string;
   category: "UI/UX" | "フロントエンド" | "SEO" | "雑記";
+  view_count: number;
 }

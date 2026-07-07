@@ -57,6 +57,7 @@ const BlogPreviewClient = () => {
     created_at: new Date(),
     updated_at: new Date(),
     userId: crypto.randomUUID() as `${string}-${string}-${string}-${string}-${string}`,
+    view_count: 0,
   }
 
   // 投稿ボタン押下時の処理

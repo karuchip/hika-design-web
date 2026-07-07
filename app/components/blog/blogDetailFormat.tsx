@@ -49,10 +49,16 @@ const BlogDetailFormat = ({onePost}:Props) => {
 
               {/* ラベル */}
               <div className="flex justify-between mb-[16px] items-end">
-                {/* カテゴリー */}
-                <p className={`w-fit px-[10px] py-[1px] text-[#ffffff] text-[14px] md:text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
-                  {onePost.category}
-                </p>
+                <div className="flex md:gap-6 gap-4">
+                  {/* カテゴリー */}
+                  <p className={`w-fit px-[10px] py-[1px] text-[#ffffff] text-[14px] md:text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
+                    {onePost.category}
+                  </p>
+
+                  {/* 閲覧数 */}
+                  <p className="text-[#B2B6B4]">{onePost.view_count} views</p>
+                </div>
+
                 {/* 日付 */}
                 <p className="w-fit text-[16px] md:text-[18px]">{new Date(onePost.created_at).toLocaleDateString()}</p>
               </div>
