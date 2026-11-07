@@ -21,10 +21,11 @@ const Bloggrid = ({posts}: {posts: PostListType[]}) => {
               <div className="absolute top-0 left-0 w-full h-full group-hover:bg-indigo-500/10 z-1 transition-colors duration-100"></div>
 
                 <div className="w-[320px] p-3">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <p className={`w-fit text-[14px] md:text-[16px] px-[10px] py-[1px] text-[#ffffff] ${CategoryColors[item.category] || CategoryColors.default}`}>
                       {item.category}
                     </p>
+                    <p className="w-fit text-[#586869] text-[12px]">{item.view_count} views</p>
                     <p className="w-fit text-[#586869] text-[14px] md:text-[16px]">{new Date(item.created_at).toLocaleDateString()}</p>
                   </div>
 
