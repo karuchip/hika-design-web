@@ -5,6 +5,7 @@ import Image from "next/image"
 import Chapter from "@/app/components/blog/chapter";
 import Link from "next/link";
 import parseTextWithLinks from "../common/parseTextWithLinks";
+import LikeButton from "./likeButton";
 
 type Props = {
   onePost: PostType
@@ -48,8 +49,8 @@ const BlogDetailFormat = ({onePost}:Props) => {
 
 
               {/* ラベル */}
-              <div className="flex justify-between mb-[16px] items-end">
-                <div className="flex md:gap-6 gap-4">
+              <div className="flex justify-between items-center mb-[16px] items-end">
+                <div className="flex md:gap-6 gap-4 items-center">
                   {/* カテゴリー */}
                   <p className={`w-fit px-[10px] py-[1px] text-[#ffffff] text-[14px] md:text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
                     {onePost.category}
@@ -57,6 +58,9 @@ const BlogDetailFormat = ({onePost}:Props) => {
 
                   {/* 閲覧数 */}
                   <p className="text-[#B2B6B4]">{onePost.view_count} views</p>
+
+                  {/* いいね */}
+                  <LikeButton postId={onePost.id} initialLikes={onePost.likes}/>
                 </div>
 
                 {/* 日付 */}
