@@ -6,4 +6,5 @@ export type PostListType = {
   category: "UI/UX" | "フロントエンド" | "SEO" | "雑記";
   published: boolean;
   view_count: number;
+  likes: number;
 }
