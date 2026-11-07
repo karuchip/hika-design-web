@@ -57,7 +57,7 @@ const BlogDetailFormat = ({onePost}:Props) => {
                   </p>
 
                   {/* 閲覧数 */}
-                  <p className="text-[#B2B6B4]">{onePost.view_count} views</p>
+                  <p className="text-indigo-500/80">{onePost.view_count} views</p>
 
                   {/* いいね */}
                   <LikeButton postId={onePost.id} initialLikes={onePost.likes}/>
