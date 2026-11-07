@@ -1,42 +1,37 @@
-import { supabase } from "@/src/lib/supabase";
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/src/lib/supabase';
 
-export async function POST(
-  request: Request,
-  {params}: {params: {id:string}}
-){
+// 型定義（Next.jsのバージョンや設定に合わせて調整してください）
+type Props = {
+  params: Promise<{ id: string }>;
+};
 
-  console.log("API呼び出されました")
+export async function POST(request: Request, { params }: Props) {
+  // ① params を必ず await して展開する
   const resolvedParams = await params;
   const postId = resolvedParams.id;
 
+  // ここでログを出して、ちゃんとただの文字列（UUID）になっているか確認できます
   console.log('Received postId:', postId);
 
   try {
-    const {data, error} = await supabase.rpc('increment_likes', {
-      post_id: postId,
+    const { data, error } = await supabase.rpc('increment_likes', {
+      post_id: postId, // ここは文字列のUUIDが渡るべき
     });
 
-    if(error) console.error(error)
-    if(error) throw error;
-
-    // 最新のいいね数を取得して返す
-    const {data: postData} = await supabase
-      .from('posts')
-      .select('likes')
-      .eq('id', postId)
-      .single();
+    if (error) throw error;
 
     return NextResponse.json({
       success: true,
-      likes: postData?.likes ?? 0
+      likes: data ?? 0
     });
 
-  }catch (error) {
+  } catch (error) {
     console.error('Like error:', error);
     return NextResponse.json(
-      {success: false, error: 'Failed to update likes'},
-      {status: 500}
-    )
+      { success: false, error: 'Failed to update likes' },
+      { status: 500 }
+    );
   }
 }
