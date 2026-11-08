@@ -64,7 +64,7 @@ export default function LikeButton({ postId, initialLikes }: LikeButtonProps) {
     <button
       onClick={handleLike}
       disabled={hasLiked || isLoading}
-      className={`group flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 border ${
+      className={`group flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-200 border ${
         hasLiked
           ? 'bg-pink-50 border-pink-200 text-pink-600 cursor-default shadow-sm'
           : 'bg-white border-gray-200 hover:border-pink-300 hover:bg-pink-50/50 text-gray-700 hover:text-pink-600 shadow-sm'

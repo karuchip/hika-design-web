@@ -6,6 +6,7 @@ import Chapter from "@/app/components/blog/chapter";
 import Link from "next/link";
 import parseTextWithLinks from "../common/parseTextWithLinks";
 import LikeButton from "./likeButton";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 type Props = {
   onePost: PostType
@@ -49,19 +50,11 @@ const BlogDetailFormat = ({onePost}:Props) => {
 
 
               {/* ラベル */}
-              <div className="flex justify-between items-center mb-[16px] items-end">
-                <div className="flex md:gap-6 gap-4 items-center">
-                  {/* カテゴリー */}
-                  <p className={`w-fit px-[10px] py-[1px] text-[#ffffff] text-[14px] md:text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
-                    {onePost.category}
-                  </p>
-
-                  {/* 閲覧数 */}
-                  <p className="text-indigo-500/80">{onePost.view_count} views</p>
-
-                  {/* いいね */}
-                  <LikeButton postId={onePost.id} initialLikes={onePost.likes}/>
-                </div>
+              <div className="flex justify-between items-center mb-[16px]">
+                {/* カテゴリー */}
+                <p className={`w-fit px-[10px] py-[1px] text-[#ffffff] text-[14px] md:text-[16px] ${CategoryColors[onePost.category] || CategoryColors.default}`}>
+                  {onePost.category}
+                </p>
 
                 {/* 日付 */}
                 <p className="w-fit text-[16px] md:text-[18px]">{new Date(onePost.created_at).toLocaleDateString()}</p>
@@ -69,6 +62,18 @@ const BlogDetailFormat = ({onePost}:Props) => {
 
               {/* タイトル */}
               <h1 className="w-full text-[28px] md:text-[40px] font-bold mb-[15px] break-words">{onePost.title}</h1>
+
+              {/* 閲覧数・いいね */}
+              <div className="flex justify-end gap-6 items-center mb-4">
+                {/* 閲覧数 */}
+                  <div className="flex items-center text-indigo-500/80 gap-1">
+                    <VisibilityIcon style={{ fontSize: '16px' }} />
+                    <p className="w-fit text-indigo-500/80 text-[14px] lg:text-[16px]">{onePost.view_count}</p>
+                  </div>
+
+                  {/* いいね */}
+                  <LikeButton postId={onePost.id} initialLikes={onePost.likes}/>
+              </div>
 
               {/* 区切り棒 */}
               <div className="w-full h-[7px] bg-gray-500/20">
