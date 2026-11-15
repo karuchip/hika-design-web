@@ -1,28 +1,11 @@
-import { UsePostLatest } from "@/src/hooks/usePostLatest"
-import Loading from "../common/loading";
+import { PostListType } from "@/src/type/postListType";
 import Bloggrid from "../blog/bloggrid";
 
-const BlogLatest = () => {
-
-  // カスタムフックの呼び出し
-  const {postLatest, loading, error} = UsePostLatest();
-
-  if (loading) {
-    return <Loading />
-  }
-
-  if (error) {
-    return <h3>Error: {error}</h3>
-  }
-
-  if (!postLatest) {
-    return <h3>Posts not found</h3>
- }
+export default function BlogLatest({posts}: {posts: PostListType[]}) {
 
  return(
-  <Bloggrid posts={postLatest}/>
+  <Bloggrid posts={posts}/>
  )
 
 }
 
-export default BlogLatest
