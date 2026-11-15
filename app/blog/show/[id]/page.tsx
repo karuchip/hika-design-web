@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
-import BlogDetailClient from "./BlogDetailClient";
+import { notFound } from "next/navigation";
+import Breadcrumb from "@/app/components/common/breadcrumb";
+import BlogDetailFormat from "@/app/components/blog/blogDetailFormat";
 import { fetchOnePost } from "@/src/fetchOnePost";
+import ViewCount from "@/app/components/blog/viewCount";
 
+type Props = {
+  params: Promise<{ id: string }>;
+};
 
-// 画面表示時にすぐにmetaデーターを取得
-export async function generateMetadata({params}:{params: Promise<{ id: string }>}) : Promise<Metadata> {
-  const resolvedParams = await params;
-  const {data: post} = await fetchOnePost(resolvedParams.id);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const { data: post } = await fetchOnePost(id);
 
   const title = post?.title ?? "Hika Dev + Design";
-  const description = "UI/UXやフロントエンド開発の学習記録をまとめています。"
+  const description = "UI/UXやフロントエンド開発の学習記録をまとめています。";
 
   return {
     title,
@@ -17,32 +22,49 @@ export async function generateMetadata({params}:{params: Promise<{ id: string }>
     openGraph: {
       title,
       description,
-      url: `https://hika-design.com/blog/show/${resolvedParams.id}`,
-      images: [
-        {
-          url: "https://hika-design.com/ogp.png",
-        },
-      ],
+      url: `https://hika-design.com/blog/show/${id}`,
+      images: ["https://hika-design.com/ogp.png"],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["https://hika-design.com/opg.png"]
-    }
-  }
+      images: ["https://hika-design.com/ogp.png"],
+    },
+  };
 }
 
-// ページ表示用
-const BlogDetailPage = async ({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) => {
+export default async function BlogDetailPage({ params }: Props) {
+  const { id } = await params;
+  const { data: post, error, status } = await fetchOnePost(id);
 
-  const resolvedParams = await params;
+  if (status === 404 || (!error && !post)) {
+    notFound();
+  }
 
-  return <BlogDetailClient params={resolvedParams} />;
-};
+  if (error) {
+    throw new Error(error.message);
+  }
 
-export default BlogDetailPage;
+  if (!post) {
+    notFound();
+  }
+
+  // 閲覧数の加算は副作用なので、今までどおりクライアント側から実行する
+  return (
+    <>
+      <ViewCount id={id} />
+
+      <div className="pt-30 bg-[#FCFCFC]">
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Blog", href: "/blog/show" },
+            { label: post.title },
+          ]}
+        />
+        <BlogDetailFormat onePost={post} />
+      </div>
+    </>
+  );
+}

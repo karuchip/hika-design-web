@@ -1,33 +1,11 @@
 "use client"
 
-import Loading from "@/app/components/common/loading";
 import Breadcrumb from  "@/app/components/common/breadcrumb"
 import Bloggrid from "@/app/components/blog/bloggrid"
-import { UsePost } from "@/src/hooks/usePost";
+import { PostListType } from "@/src/type/postListType";
 
 
-
-
-const BlogClient = () => {
-
-  // カスタムフックの呼び出し
-  const {posts, loading, error} = UsePost();
-
-  if (loading) {
-    return<Loading/>
-  }
-
-  if (error) {
-    return(
-      <h3>Error: {error}</h3>
-    )
-  }
-
-  if(!posts) {
-    return(
-      <h3>Posts not found</h3>
-    )
-  }
+const BlogClient = ({posts}: {posts: PostListType[]}) => {
 
   return(
     <>

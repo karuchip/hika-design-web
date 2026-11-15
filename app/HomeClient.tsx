@@ -4,8 +4,9 @@ import Image from "next/image"
 import Link from "next/link"
 import BlogLatest from "./components/home/blogLatest"
 import { FadeIn } from "./components/animation/fadein"
+import { PostListType } from "@/src/type/postListType"
 
-const HomeClient = () => {
+const HomeClient = ({posts}: {posts: PostListType[]}) => {
   return(
     <>
       <div className="pt-30">
@@ -42,7 +43,7 @@ const HomeClient = () => {
             <div className="w-full">
               <h2 className="w-fit mx-auto mb-3 text-[42px] md:text-[56px] text-indigo-500">Blog</h2>
 
-              <BlogLatest/>
+              <BlogLatest posts={posts}/>
               <div className="w-fit mx-auto mt-10">
                 <Link href="/blog/show" className="border border-indigo-500 p-3 hover:bg-indigo-500 text-indigo-500 hover:text-[#ffffff] font-bold transition-colors duration-300">全ての記事を見る</Link>
               </div>
